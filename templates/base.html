@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/base.css' %}">
+   
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+    <!-- <script src="{%static 'js/bootstrap.bundle.min.js' %}"></script> -->
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" /> -->
+    <title>Base</title>
+    <link rel="icon" href="https://w7.pngwing.com/pngs/361/627/png-transparent-leaf-logo-green-leaves-green-and-teal-leaf-logo-text-maple-leaf-grass-thumbnail.png" type="image/png">
+    <style> 
+    .form-control:focus {
+      border: 1px solid #4baf47 !important;
+      box-shadow: none !important;
+      }
+    .dropdown-item:active{
+        background-color: rgba(75, 175, 71,0.1) !important;
+    } 
+
+    .loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensures it appears on top of everything */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.loader-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: none; /* Initially hidden */
+  background: #4baf47; /* Your preferred color */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  font-size: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#backToTop:hover {
+  background-color: #388e3c;
+  transform: scale(1.1);
+}
+  
+    @media (max-width: 768px) {
+        .log{margin-top: -30px !important;
+            margin-left: 20px !important;
+            
+        }
+        .log1{
+            margin-left: 80px !important;
+        }
+
+        .footer{
+            padding-left: 0px !important;
+        }
+        .foot-cont{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0px !important;
+          
+        }
+
+        .remove{
+            display: none;
+        }
+        .foot{
+            padding :0px !important;
+            padding-left: 20px !important;
+        }
+        .grow{
+            font-size: 20px !important;
+        }
+        .top-remove{
+            padding-top: 0px !important;
+        }
+        .top-remove{
+            margin-top: -30px !important;
+        }
+       
+    }
+    </style>
+    <!-- <script type="text/javascript">
+        (function() {
+            // Function to prevent back navigation
+            var preventBack = function() {
+                window.history.forward();
+            };
+    
+            // Modify the browser history state when the page loads
+            window.onload = function() {
+                preventBack(); // Prevent backward navigation on page load
+    
+                // Push a state to override the current page in history, so back won't work
+                window.history.pushState(null, null, window.location.href);
+            };
+    
+            // Re-apply history push on page show if page was cached
+            window.onpageshow = function(evt) {
+                if (evt.persisted) {
+                    window.history.pushState(null, null, window.location.href);
+                }
+            };
+    
+            // Ensure the page can't be unloaded via back navigation
+            window.onunload = function() {};
+        })();
+    </script> -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const loader = document.getElementById("loader");
+      
+          // Show loader when a link is clicked
+          document.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", event => {
+              // Skip links that:
+              // 1. Open in a new tab (_blank).
+              // 2. Are dropdown toggles (but include dropdown menu items).
+              if (
+                link.target === "_blank" || 
+                link.classList.contains("dropdown-toggle")
+              ) {
+                return;
+              }
+      
+              // Allow navigation only for links that go forward (not back)
+              if (window.location.href !== link.href) {
+                event.preventDefault(); // Prevent immediate navigation to allow loader to show
+      
+                // Show loader and wait before navigating
+                loader.classList.add("show");
+      
+                // Hide loader before navigation starts
+                window.addEventListener("beforeunload", () => {
+                  loader.classList.remove("show");
+                });
+      
+                setTimeout(() => {
+                  window.location.href = link.href; // Navigate after delay
+                }, 1500); // Adjust the time (in milliseconds) as needed
+              }
+            });
+          });
+      
+          // Hide loader after page loads (on the new page load)
+          window.addEventListener("load", () => {
+            loader.classList.remove("show"); // Ensure loader is removed after page load
+          });
+        });
+      </script>
+</head>
+
+<body>
+   
+
+    <!--header-->
+    <div id="loader" class="loader-overlay">
+        <img src="{%static 'images/loader.gif' %}" alt="Loading..." height="200px" width="200px" style="border-radius: 50%;">
+    </div>
+    <section style="padding-bottom: 80px;" class="small-screen">
+        <nav class="navbar ps-5 pe-5">
+            <div class="navbar-brand">
+                <a href="{% url 'Home' %}"><img src="{% static 'images/logo.png' %}" height="60px" width="75px"><span style="font-size: 30px;">AgroTech</span></a>
+            </div>
+    
+            <div class="navbar-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+    
+            <!-- Centered Navbar Links -->
+            <ul class="navbar-links" >
+                <li><a href="{% url 'Home' %}">Home</a></li>
+                <li><a href="{% url 'About' %}" target="_parent">About</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Insights
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'Latest Technologies' %}" target="_parent">Latest Technologies</a></li>
+                        <li><a class="dropdown-item" href="{% url 'University' %}" target="_parent">Universities</a></li>
+                        <li><a class="dropdown-item" href="{% url 'Schemes' %}" target="_parent">Farmer Schemes</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'Blogs' %}" target="_parent">Blogs</a></li>
+                <li><a href="{% url 'News' %}" target="_parent">News</a></li>
+                <li><a href="{% url 'Contact Us' %}" target="_parent">Contact</a></li>
+            </ul>
+    
+            <!-- Right-Aligned Auth Links -->
+            <div class="auth-links">
+                <a href="{% url 'Signin_g' %}" target="_parent" style="text-decoration: none;">
+                    <!-- <a href="{% url 'Signin_g' %}" target="_parent" style="text-decoration: none;"> -->
+                    <p class="fs-3 pe-3 ps-3 mt-2 log log1" style="font-family: 'Times New Roman';">Login</p>
+                </a>
+                <a href="{% url 'Signup' %}" target="_parent" style="text-decoration: none;">
+                    <p class="fs-3 pe-3 ps-3 mt-2 log" style="font-family: 'Times New Roman';">Signup</p>
+                </a>
+            </div>
+        </nav>
+    </section>
+    
+
+    <script>
+        const navbarToggle = document.querySelector('.navbar-toggle');
+        const navbarLinks = document.querySelector('.navbar-links');
+        const authLinks = document.querySelector('.auth-links');
+    
+        navbarToggle.addEventListener('click', () => {
+            navbarLinks.classList.toggle('active');
+            authLinks.classList.toggle('active');
+        });
+    </script>
+
+
+    
+   {% block content %}
+   {% endblock %}
+
+   <div style="position: absolute;z-index:1000;">
+    {% include 'chatbot.html' %}
+</div>
+    <!--Footer-->
+    
+    <section>
+
+        <div class="footer" style="background-image: url({%static 'images/footer.jpg' %}); overflow-x: hidden;">
+            <div style="background-color: rgba(0, 0, 0,0.9);width:100%;padding-left: 100px;" class="footer">
+                <div class="row p-5 ps-2">
+                    <div class="col-md-3 pt-5 ps-5 top-remove">
+                        <p class="fs-1 sub-heading"><img src="{%static 'images/file.png' %}" width="80px" height="70px">AgroTech</p>
+                        <p style="color:#a7a7a7;line-height: 24px;">By leveraging the power of data and advanced
+                            analytics, we cultivate a smarter, more efficient farming ecosystem for a healthier planet."
+                        </p>
+                        <div class="icons pt-3">
+                            <a href="https://www.facebook.com/" ><div class="icon "><img src="{%static 'images/facebook.png' %}" width="20px" height="20px"></div></a>
+                            <a href="https://x.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZW4iLCJteCI6IjIifQ%3D%3D%22%7D"><div class="icon"><img src="{%static 'images/twitter.png' %}" width="20px" height="20px"></div></a>
+                            <a href="https://www.instagram.com/"><div class="icon"><img src="{%static 'images/instagram.png' %}" width="20px" height="20px"></div></a>
+                            <a href="https://www.linkedin.com/home"><div class="icon"><img src="{%static 'images/linkedin.png' %}" width="20px" height="20px"></div></a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 pt-5 ps-5 top-remove">
+                        <p class="fs-5 sub-heading pt-3 ">Explore</p>
+                        <ul style="line-height: 35px;padding: 0;">
+                            <a href="{%url 'About' %}" target="_parent" style="text-decoration: none;"><li><img src="{%static 'images/leaf.png' %}" width="20px" height="20px">&nbsp;&nbsp;<span
+                                    class="line">About</span></li></a>
+                            <a href="{%url 'Schemes' %}" target="_parent" style="text-decoration: none;"><li><img src="{%static 'images/leaf.png' %}" width="20px" height="20px">&nbsp;&nbsp;<span
+                                    class="line">Schemes</span></li></a>
+                            <a href="{%url 'Blogs' %}" target="_parent" style="text-decoration: none;"><li><img src="{%static 'images/leaf.png' %}" width="20px" height="20px">&nbsp;&nbsp;<span
+                                    class="line">Blogs</span></li></a>
+                            <a href="{%url 'Latest Technologies' %}" target="_parent" style="text-decoration: none;"><li><img src="{%static 'images/leaf.png' %}" width="20px" height="20px">&nbsp;&nbsp;<span
+                                    class="line">Technologies</span></li></a>
+                            <a href="{%url 'News' %}" target="_parent" style="text-decoration: none;"><li><img src="{%static 'images/leaf.png' %}" width="20px" height="20px">&nbsp;&nbsp;<span
+                                    class="line">Latest News</span></li></a>
+                            <a href="{%url 'Contact Us' %}" target="_parent" style="text-decoration: none;"><li><img src="{%static 'images/leaf.png' %}" width="20px" height="20px">&nbsp;&nbsp;<span
+                                    class="line">Contact</span></li></a>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3 pt-5 top-remove">
+                        <p class="fs-5 sub-heading pt-3">News</p>
+                        <div class="news-footer">
+                            <img src="{%static 'images/footer.jpg' %}" height="80px" width="80px" style="border-radius: 10px;">
+                            <div class="ps-3">
+                                <p style="color: white;font-weight: 400;">AI-Powered Analysis Revolutionizes Crop
+                                    Disease Detection</p>
+                                <p style="color:#eec044">July 20, 2024</p>
+                            </div>
+
+
+                        </div>
+                        <div class="news-footer pt-3">
+                            <img src="{%static 'images/vegetables - Copy.jpg' %}" height="80px" width="80px"
+                                style="border-radius: 10px;">
+                            <div class="ps-3">
+                                <p style="color: white;font-weight: 400;">ML Models Predict Climate Impact on Crop
+                                    Growth</p>
+                                <p style="color:#eec044">July 10, 2024</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 pt-5 pe-5 foot top-remove">
+                        <div class="foot-cont">
+                        <p class="fs-5 sub-heading pt-3">Contact</p>
+                        <p style="color: #a7a7a7;"><img src="{%static 'images/call.png' %}" width="20px"
+                                height="20px">&nbsp;&nbsp;&nbsp;&nbsp;79863 14223</p>
+                        <p style="color: #a7a7a7;"><img src="{%static 'images/email (1).png' %}" width="20px"
+                                height="20px"><span class="remove">&nbsp;&nbsp;&nbsp;&nbsp;</span>      manorma2523@gmail.com</p>
+                        <p style="color: #a7a7a7;"><img src="{%static 'images/maps-and-flags.png' %}" width="20px"
+                                height="20px"><span class="remove">&nbsp;&nbsp;&nbsp;&nbsp;</span>Gopal Nagar, Majitha Road</p>
+                        </div>
+                        <div class="pe-5 pt-2 foot-cont">
+                            <p class="grow" style="color: #d4d4d4;font-size: 40px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><span class="icofont-leaf"></span>  Grow Together</p>
+                            <p style="color: #a7a7a7;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;margin-top: -20px;">Together, we cultivate a sustainable future. Let's grow stronger, one step.</p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div style="background-color: rgba(0, 0, 0,0.98); height:80px;width:100%">
+                <div>
+                    <p class="pt-4" style="color: #a7a7a7;font-weight: bold;text-align: center;">All Copyright 2024 By
+                        <span style="color:#4baf47" class="fs-5">AgroTech</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <button id="backToTop" title="Go to top">↑</button>
+    <script>
+        // Get the button
+const backToTopButton = document.getElementById("backToTop");
+
+// Show the button when the user scrolls down 100px
+window.onscroll = function () {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    backToTopButton.style.display = "block";
+  } else {
+    backToTopButton.style.display = "none";
+  }
+};
+
+// Scroll to the top when the button is clicked
+backToTopButton.onclick = function () {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+{% block content %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Technologies in Agriculture</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgba(238, 192, 68, 0.1) 
+        }
+
+        .container {
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .technology-card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .technology-card:nth-child(odd) {
+            background-color: rgba(75, 175, 71, 0.4);
+        }
+
+        .technology-card:nth-child(odd):hover {
+            background-color: rgb(75, 175, 71);
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .technology-card:nth-child(even) {
+            background-color: rgba(238, 192, 68, 0.4);
+        }
+
+        .technology-card:nth-child(even):hover {
+            background-color: rgb(238, 192, 68);
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        p {
+            color: white;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .technology-card p,
+        h3 {
+            color: #000000;
+        }
+
+        .technology-card:nth-child(odd):hover p,
+        .technology-card:nth-child(odd):hover h3 {
+            color: white;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        /* Existing CSS */
+.i {
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+/* Style for the magnifying glass */
+.magnifier {
+    position: absolute;
+    border: 1px solid #000;
+    border-radius: 50%; 
+    width: 80px;
+    height: 80px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    background-repeat: no-repeat;
+    display: none; /* Hidden initially */
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.i img {
+    display: block;
+}
+     
+
+        @media (max-width: 768px) {
+            .container{
+                padding: 0px;
+            }
+            .a{
+                padding: 0px !important;
+            }
+            p{
+                line-height: 1.3;
+            }
+            .i{
+                height: 200px;
+            }
+
+           
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div style="background-image: url({%static 'images/wheat.jpg' %});background-size:cover;height: 250px;width: 100%;">
+        <div style="background-color: rgba(0,0,0,0.4);height: 250px;display: flex;justify-content: center;align-items: center;">
+            <p class="fs-2=5" style="color:#e3dbdb;font-family: sans-serif;letter-spacing: 2px;">INSIGHTS / TECHNOLOGIES</p>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+        <div class="row pb-5 ps-3 pe-3 ">
+            <h1 data-aos="zoom-in"
+            data-aos-duration="1200">Latest Technologies</h1>
+            {% for i in data %}
+            <div class="col-md-12 technology-card mt-5 mb-2">
+                <div class="row">
+                    {% if forloop.counter|divisibleby:2 %}
+                    <div class="col-md-6 ps-5 pe-5 pt-3 a" data-aos="zoom-in-right" data-aos-duration="1200">
+                        <h3>{{ i.name }}</h3>
+                        <p>{{ i.desc|safe }}</p>
+                    </div>
+                    <div class="col-md-6 pt-3 pb-3" data-aos="zoom-in-left" data-aos-duration="1500">
+                        <div class="i">
+                            <img src="{{ i.image.url }}" alt="{{ i.name }}" width="100%" height="350px">
+                            <div class="magnifier"></div> <!-- Add the magnifier div -->
+                        </div>
+                    </div>
+                    {% else %}
+                   
+                    <div class="col-md-6 pt-3 pb-3" data-aos="zoom-in-right" data-aos-duration="1500">
+                        <div class="i">
+                            <img src="{{ i.image.url }}" alt="{{ i.name }}" width="100%" height="350px">
+                            <div class="magnifier"></div> <!-- Add the magnifier div -->
+                        </div>
+                    </div>
+                    <div class="col-md-6 ps-5 pe-5 pt-3 a" data-aos="zoom-in-left" data-aos-duration="1500">
+                        <h3>{{ i.name }}</h3>
+                        <p>{{ i.desc|safe }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+     document.addEventListener('DOMContentLoaded', function () {
+    const imageContainers = document.querySelectorAll('.i');
+
+    imageContainers.forEach(container => {
+        const magnifier = container.querySelector('.magnifier');
+        const image = container.querySelector('img');
+
+        container.addEventListener('mousemove', function (e) {
+            // Display the magnifier
+            magnifier.style.display = 'block';
+
+            // Calculate the cursor's position relative to the image
+            const rect = image.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Calculate the background position and size
+            const bgPosX = -(x * 2 - magnifier.clientWidth / 2);
+            const bgPosY = -(y * 2 - magnifier.clientHeight / 2);
+
+            magnifier.style.left = `${x - magnifier.clientWidth / 2}px`;
+            magnifier.style.top = `${y - magnifier.clientHeight / 2}px`;
+            magnifier.style.backgroundImage = `url(${image.src})`;
+            magnifier.style.backgroundSize = `${image.width * 2}px ${image.height * 2}px`;  // Zoom factor adjusted
+            magnifier.style.backgroundPosition = `${bgPosX}px ${bgPosY}px`;
+        });
+
+        container.addEventListener('mouseleave', function () {
+            // Hide the magnifier when not hovering
+            magnifier.style.display = 'none';
+        });
+    });
+});
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+{% endblock %}

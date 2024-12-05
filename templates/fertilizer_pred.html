@@ -1,0 +1,346 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Predictions</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background-color: rgba(238, 192, 68, 0.1);
+        }
+        .heading-design {
+            text-align: center;
+            font-family: 'Algerian', sans-serif;
+            background: linear-gradient(90deg, #4baf47, #eec044);
+            color: white;
+            padding: 20px;
+            width: 70%;
+            border-radius: 15px;
+            font-size: 2.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        .crop-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 30px 20px;
+        }
+
+        .crop-item {
+    position: relative;
+    flex: 1 1 300px;
+    margin: 10px;
+    background: linear-gradient(to right, rgba(238, 192, 68,0.2), rgba(75, 175, 71,0.2));;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.crop-item img {
+    width: 100%;
+    height: 250px;
+    transition: transform 0.3s;
+}
+
+.crop-item:hover {
+    transform: scale(1.05);
+}
+
+.crop-item:hover img {
+    transform: scale(1.1);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    transition: opacity 0.3s;
+}
+
+.crop-item:hover .overlay {
+    opacity: 0;
+}
+
+.crop-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.crop-title {
+    font-family: 'Roboto';
+    font-size: 24px;
+    margin: 10px 0;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.predict-button {
+    background-color: #eec044;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.predict-button:hover {
+    background-color: #4baf47;
+}
+
+.crop-item:hover .predict-button {
+    background-color: #4baf47 !important;
+}
+
+.overlay-container {
+    position: relative;
+}
+
+.overlay-container:hover .overlay {
+    opacity: 1;
+}
+
+.overlay-container:hover img {
+    transform: scale(1.1);
+}
+
+        .crop-item:hover .overlay {
+            opacity: 0;
+        }
+
+        .predict-button {
+            background-color: #eec044;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 1;
+            position: relative;
+        }
+
+        .predict-button:hover {
+            background-color: #4baf47;
+        }
+
+        .crop-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .crop-title {
+            font-family: 'Roboto';
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .crop-description {
+            font-family: 'Roboto', sans-serif;
+            color: #555;
+        }
+
+        .prediction-text {
+            font-family: 'Roboto', sans-serif;
+            color: #4baf47;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        /* Hover effect to reveal predictions */
+        .prediction-text {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .crop-item:hover .prediction-text {
+            opacity: 1;
+        }
+
+        .predict-icon {
+            margin-bottom: 10px;
+            font-size: 30px;
+            color: #eec044;
+        }
+        .crop-item:hover .predict-button{
+            background-color: #4baf47 !important;
+        }
+        .crop-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem; /* Large font size */
+    font-weight: 600; /* Semi-bold font weight */
+    color: #4baf47; /* Green color */
+    text-align: center; /* Center align */
+    position: relative;
+    display: inline-block;
+
+
+}
+
+.crop-heading::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background-color: #eec044; /* Gold color */
+    margin: 10px auto 0; /* Center it below the heading */
+}
+.m {
+       
+       animation: moveArrow 1s infinite alternate, glow 1.5s infinite;
+   }
+   .container{
+    margin-top: -70px;
+   }
+
+   /* Animation for moving the arrow */
+   @keyframes moveArrow {
+       0% {
+           transform: translateX(0);
+       }
+       100% {
+           transform: translateX(-10px);
+       }
+   }
+   a{
+    color:black;
+    text-decoration:none
+   }
+@media (max-width: 768px) {
+    .heading-design {
+            text-align: center;
+            font-family: 'Algerian', sans-serif;
+            background: linear-gradient(90deg, #4baf47, #eec044);
+            color: white;
+            padding: 20px;
+            width: 80%;
+            border-radius: 15px;
+            font-size: 1.0rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            display: inline-block;
+            margin-left: 60px
+           
+        }
+
+        .m{
+                margin-left: -90px !important;
+            }
+            .crop-heading{
+                font-size: 15px;
+                margin-left: 70px;
+                margin-top: -20px !important;
+            }
+            .crop-container{
+                padding: 0px !important;
+                width: 270px;
+            }
+            .im{
+                height: 200px !important;
+            }
+            .container{
+margin-left: -65px;
+            }
+    
+   }
+
+
+
+    </style>
+</head>
+
+<body style="background-color: rgba(238, 192, 68, 0.1);">
+    <div style="display: flex; align-items: start; font-size: 50px; position: relative;margin-top: -10px;" class="m">
+        <a href="{% url 'pred' %}"><i class="icofont-arrow-left back-icon ps-5"></i></a>
+    </div>
+    <div class="container">
+        <div class="text-center mt-4" data-aos="fade-down" data-aos-duration="1000">
+            <h2 class="heading-design">Forecasting Fertilizer Usage</h2>
+        </div>
+        <div style="display: flex;justify-content: center;align-items: center;">
+        <h1 class="crop-heading">Fertilizers Predictions</h1>
+        </div>
+        <div class="crop-container">
+            <div class="crop-item" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="overlay-container">
+                    <img src="{% static 'images/nitrogen.webp' %}" alt="Wheat" class="im">
+                    <div class="overlay" style="display: flex;flex-direction: column;margin-top: x;">
+                        <div style="margin-top: 100px;">
+                            <p class="mt-5">Explore the future of nitrogen usage with our advanced yield prediction system.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="crop-content">
+                    <h3 class="crop-title">Nitrogen</h3>
+                    <a href="{% url 'nitrogen_pred'%}">
+                        <button class="predict-button">Make Predictions</button>
+                        </a>
+                </div>
+            </div>
+            
+            <div class="crop-item" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="overlay-container">
+                    <img src="{% static 'images/potassium.jpg' %}" alt="Maize" class="im">
+                    <div class="overlay" style="display: flex;flex-direction: column;margin-top: x;">
+                        <div style="margin-top: 100px;">
+                            <p class="mt-5">Explore the future of potassium usage with our advanced yield prediction system.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="crop-content">
+                    <h3 class="crop-title">Potassium</h3>
+                    <a href="{% url 'potash_pred'%}">
+                        <button class="predict-button">Make Predictions</button>
+                        </a>
+                </div>
+            </div>
+            
+            <div class="crop-item pb-2" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="overlay-container">
+                    <img src="{% static 'images/phosphorus.webp' %}" alt="Rice" class="im">
+                    <div class="overlay" >
+                    <div style="margin-top: 100px;">
+                        <p class="mt-5">Explore the future of phosphorus usage with our advanced yield prediction system.</p>
+                    </div>
+                    </div>
+                </div>
+                <div class="crop-content">
+                    <h3 class="crop-title">Phosphorus</h3>
+                    <a href="{% url 'phos_pred'%}">
+                        <button class="predict-button">Make Predictions</button>
+                        </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

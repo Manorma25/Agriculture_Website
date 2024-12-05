@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phosphate Use Prediction</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <style>
+        /* Font imports for modern styles */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+          
+        }
+
+        .cd {
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 1100px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255,0.8), rgba(238, 192, 68,0.5));
+             
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .card-header,
+        .card-body {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-header {
+            background-color: #eec044;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 50px !important;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        form label {
+            font-weight: bold;
+            color: #34495e;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        form .form-control,
+        form .form-select {
+            border: 1px solid #34495e;
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        form .form-control:focus,
+        form .form-select:focus {
+            outline: none;
+            border-color: #eec044;
+            box-shadow: 0 0 5px rgba(238, 192, 68, 0.5);
+        }
+
+        .b {
+            background-image: linear-gradient(rgba(255, 255, 255,0.4) 0, rgba(255, 255, 255, 0) 70%);
+            background-color: #53b150;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .b:hover {
+            background-color: #eec044;  
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .graph-container {
+            margin-top: 40px;
+            text-align: center;
+            display: block; /* Ensure the graph is visible by default */
+        }
+
+        .graph-container .card {
+            background-color: transparent;
+            padding: 20px;
+            padding-bottom: 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .loader {
+            display: none;
+            border: 6px solid #f3f3f3; /* Light grey */
+            border-top: 6px solid #4baf47; /* Your primary color */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-container {
+            display: none;
+  display: flex;
+  justify-content: center;
+  
+ 
+  /* Full height of the viewport */
+}
+
+        /* HTML: <div class="loader"></div> */
+        .loader1 {
+            display: none;
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  background: linear-gradient(90deg, #eec044 50%, #0000 0) right/200% 100%;
+  animation: l21 2s infinite linear;
+}
+
+.loader1::before {
+  content: "Loading...";
+  color: #0000;
+  padding: 0 5px;
+  background: inherit;
+  background-image: linear-gradient(90deg, #fff 50%, #eec044 0);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+
+@keyframes l21{
+  100%{background-position: left}
+}
+.m {
+       
+       animation: moveArrow 1s infinite alternate, glow 1.5s infinite;
+   }
+
+   /* Animation for moving the arrow */
+   @keyframes moveArrow {
+       0% {
+           transform: translateX(0);
+       }
+       100% {
+           transform: translateX(-10px);
+       }
+   }
+   a{
+    color: black;
+    text-decoration: none;
+    
+   }
+
+@media(max-width:768px){
+    .pred1{
+        display: flex;
+        justify-content: start !important;
+
+    }
+    .remove1{
+        display: none !important;
+    }
+}
+      
+    </style> 
+   
+     <!-- <script>
+      function validateAndShowGraph() {
+    // First, validate the number
+    var num = document.getElementById('steps').value;
+    
+    if (num > 50 || num < 1) {
+        alert("Please enter a number between 1 and 50.");
+        return false; 
+    }
+
+    const graphContainer = document.querySelector('.graph-container');
+    graphContainer.style.display = 'block'; 
+
+    return true; 
+}
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('form').on('submit', function(event) {
+                event.preventDefault(); // Prevent the form from submitting immediately
+    
+                $('.graph-container').hide(); // Hide existing images
+                $('.loader').show();
+                $('.loader-container').show();
+                $('.loader1').show();  // Show the loader spinner
+    
+                // Submit the form programmatically after UI changes
+                this.submit();
+            });
+        });
+    </script> -->
+
+    <script>
+        function validateAndShowGraph() {
+            // Validate the number
+            var num = document.getElementById('steps').value;
+    
+            if (num === "" || num > 50 || num < 1) {
+                alert("Please enter a number between 1 and 50.");
+                return false; // Prevent form submission
+            }
+    
+            // Show the graph container if validation passes
+            const graphContainer = document.querySelector('.graph-container');
+            graphContainer.style.display = 'block';
+    
+            return true; // Allow form submission
+        }
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $('form').on('submit', function (event) {
+                event.preventDefault(); // Prevent the form from submitting immediately
+    
+                // Validate form inputs
+                if (!validateAndShowGraph()) {
+                    return; // Stop execution if validation fails
+                }
+    
+                // Hide existing images, show loader, and programmatically submit the form
+                $('.graph-container').hide();
+                $('.loader').show();
+                $('.loader-container').show();
+                $('.loader1').show();
+    
+                // Submit the form after validation passes
+                this.submit();
+            });
+        });
+    </script>
+</head>
+
+<body style="background-color: rgba(238, 192, 68, 0.1);">
+    <div style="display: flex; align-items: start; font-size: 50px; position: relative;margin-top: -10px;cursor: pointer;z-index: 2;" class="m">
+        <a href="{% url 'fertilizer_pred' %}"><i class="icofont-arrow-left back-icon ps-5"></i></a>
+    </div>
+    <div class="cd" style="margin-top: -60px;">
+        <div class="card mb-5">
+            <div class="card-header" style="margin-top: -18px;">
+              {{ heading }}
+            </div>
+            <div class="card-body">
+                <div class="row pt-3" style="background: linear-gradient(to bottom, rgb(255, 255, 255), rgba(75, 175, 71,0.3));box-shadow:0 4px 8px rgba(0, 0, 0, 0.3); border-radius: 30px;">
+                    <div class="col-md-6">
+                        <div style="display:flex;justify-content: end;align-items: center;" class="pred1">
+                            <form method="POST" onsubmit="return validateAndShowGraph()">
+                                {% csrf_token %}
+                                <div class="mb-2">
+                                    <label for="country" class="form-label">Select Country:</label>
+                                    <select class="form-select" name="country" id="country">
+                                        {% for c in data %}
+                                        <option value="{{ c }}" {% if c == selected_country %}selected{% endif %}>{{ c }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label for="steps" class="form-label">Number of years:</label>
+                                    <input type="text" class="form-control" name="steps" id="steps" value="{{ steps }}"
+                                        placeholder="Enter number of years" autocomplete="off">
+                                </div>
+
+                                <button type="submit" class="btn b">Predict</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 remove1" style="display: flex;justify-content: center;align-items: center;">
+                        <img src="{% static 'images/check-unscreen.gif' %}" height="250px" width="300px">
+                    </div>
+                </div>
+
+                <div class="loader mt-5 mb-4"></div>
+
+                <div class="loader-container">
+                    <div class="loader1"></div>
+                  </div>
+
+                <!-- Graph container with initial placeholder graph -->
+                <div class="graph-container">
+                    <div id="first">
+                        {{ graph | safe }}  <!-- Placeholder or prediction graph -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
+{% endblock %}

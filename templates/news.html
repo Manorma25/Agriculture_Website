@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    
+        ::placeholder {
+            font-size: 0.8em;
+        }
+    
+        /* Unique card style */
+        .news-card {
+            width: 350px;
+            border: 1px solid #E0E0E0;
+            border-radius: 12px;
+            padding: 16px;
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+        }
+    
+        /* Image and overlay container */
+        .news-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+    
+        .news-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    
+        /* Overlay effect */
+        .news-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    
+        /* Show overlay on hover */
+        .news-card:hover .news-image-overlay {
+            opacity: 1;
+        }
+    
+        .news-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333333;
+            margin: 12px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    
+        .news-date {
+            font-size: 14px;
+            color: #777777;
+            font-style: italic;
+        }
+    
+        .news-snippet {
+            font-size: 15px;
+            color: #333333;
+            margin: 8px 0;
+            max-height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+    
+        /* Read more button */
+        .read-more {
+            display: inline-block;
+            background-color: #4baf47;
+            color: #FFFFFF;
+            padding: 8px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+    
+        .read-more::before {
+            content: '';
+            position: absolute;
+            width: 500%;
+            height: 500%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 20%, transparent 20%);
+            border-radius: 50px;
+            left: 100%;
+            top: 100%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s ease;
+        }
+    
+        .read-more:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+    
+        .read-more:hover {
+            background-color: #3c9e3a;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        .read-more:active {
+            transform: scale(0.95);
+        }
+        h1 {
+            color: #2d3748;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="background-image: url({%static 'images/wheat.jpg' %});background-size:cover;height: 250px;width: 100%;">
+        <div
+            style="background-color: rgba(0,0,0,0.4);height: 250px;display: flex;justify-content: center;align-items: center;">
+
+            <p class="fs-2=5" style="color:#e3dbdb;font-family: sans-serif;letter-spacing: 2px;">HOME / NEWS</p>
+
+        </div>
+        </div>
+    <section class="container mt-5">
+        <h1 class="mb-4" style="text-align: center;">Latest News</h1>
+        <div class="d-flex flex-wrap justify-content-center">
+            {% for article in k %}
+            <div class="news-card" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="news-image-container">
+                    <!-- Display the image from the article or use a default image if none is provided -->
+                    <img src="{{ article.urlToImage }}" alt="News Image" class="news-image"> 
+                    <div class="news-image-overlay"></div>
+                </div>
+                <h2 class="news-title">{{ article.title }}</h2>
+                <p class="news-date">{{ article.publishedAt|date:"F d, Y" }}</p>
+                <p class="news-snippet">{{ article.description|truncatewords:20 }}</p>
+                <a href="{{ article.url }}" class="read-more" target="_blank" data-aos="flip-left" data-aos-duration="1000">Read More</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    
+</body>
+
+{% endblock %}

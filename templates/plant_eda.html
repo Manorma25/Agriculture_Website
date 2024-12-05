@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'sidebar.html' %}
+    {% block content %}
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    
+    <title>Plant Disease EDA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+          
+        }
+
+        .eda-section {
+            padding: 50px 0;
+            background: linear-gradient(135deg, rgba(75, 175, 71,0.5), rgba(238, 192, 68,0.5));
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        h2 {
+            font-weight: 700;
+            font-size: 3.5rem;
+            color: #fff;
+        }
+
+        p.lead-description {
+            font-size: 1.1rem;
+            color: #fff;
+            text-align: center;
+            
+            padding: 0 15%;
+        }
+
+        .card {
+            border: none;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon i {
+            color: #4baf47;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .icon i {
+            color: #eec044;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .icon i {
+            font-size: 50px;
+        }
+
+        @media (max-width:786px){
+          .eda-section{
+            margin-left: -70px;
+          }
+          h2 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #fff;
+           
+        }
+        .container{
+          padding: 0px;
+        
+        }
+        .lead-description{
+          padding-top: 0px !important;
+          padding: 15px !important;
+          font-size: 0.9rem !important;
+        }
+        .remove-bottom{
+          padding-bottom: 0px !important;
+        }
+        .g{
+          display: none;
+        }
+        .remove-top{
+          margin-top: -20px !important;
+        }
+        }
+   
+  
+    </style>
+</head>
+<body>
+
+  <!-- Section for Plant Disease EDA -->
+  <section class="eda-section">
+    <div class="container">
+      <h2 class="text-center pb-5 remove-bottom" data-aos="fade-down" data-aos-duration="1200">Exploratory Analysis of Dataset</h2>
+      <div class="row pb-4">
+        <div class="col-md-9" data-aos="fade-right" data-aos-duration="1200">
+      <p class="lead-description" style="text-align: justify;font-weight: 500;">
+        This section offers an in-depth exploratory data analysis (EDA) for plant disease detection. Through this analysis, we can uncover essential patterns and insights into how various diseases manifest across plant species. By examining factors like disease prevalence, image distributions, and pixel color variations, we gain a deeper understanding of the dataset. Explore the cards below to dive into our findings.
+      </p>
+      </div>
+      <div class="col-md-3">
+        <img src="https://cdn-icons-gif.flaticon.com/12829/12829495.gif" class="g" height="140px" style="border-radius: 50%;margin-top: -20px;margin-left: -60px;">
+       
+      </div>
+      </div>
+      <div class="row mt-3 ps-4 pe-4 remove-top">
+        <!-- Card 1: Data Exploration -->
+        <!-- Card 1: Bar Graph of Image Counts per Class -->
+         
+<div class="col-md-3 mb-4" data-aos="zoom-in" data-aos-duration="1200">
+    <a href="{% url 'plant_eda2' %}" style="text-decoration: none;">
+    <div class="card text-center p-4 shadow-sm" style=>
+      <div class="icon mb-3">
+          <i class="icofont-chart-histogram-alt" style="font-size: 50px;"></i>
+      </div>
+      <h5 class="card-title">Class Image Counts</h5>
+      <p class="card-text">Analyse the number of images present for each class.</p>
+    </div>
+</a>
+  </div>
+ 
+  
+  <!-- Card 2: Display Images of a Selected Class -->
+  <div class="col-md-3 mb-4 mt-5" data-aos="zoom-in" data-aos-duration="1200">
+    <a href="{% url 'plant_eda1' %}" style="text-decoration: none;">
+    <div class="card text-center p-4 shadow-sm">
+      <div class="icon mb-3">
+          <i class="icofont-image" style="font-size: 50px;"></i>
+      </div>
+      <h5 class="card-title">Browse Specific Images</h5>
+      <p class="card-text">Input a class name to view all images associated with that class.</p>
+    </div>
+</a>
+  </div>
+  
+  <!-- Card 3: One Image Per Class -->
+  <div class="col-md-3 mb-4" data-aos="zoom-in" data-aos-duration="1200">
+    <a href="{% url 'plant_eda4' %}" style="text-decoration: none;">
+    <div class="card text-center p-4 shadow-sm">
+      <div class="icon mb-3">
+          <i class="icofont-file-image" style="font-size: 50px;"></i>
+      </div>
+      <h5 class="card-title">Sample Image Per Class</h5>
+      <p class="card-text">See a representative image from each class in the dataset.</p>
+    </div>
+    </a>
+  </div>
+  
+  <!-- Card 4: Color Channel Distribution -->
+  <div class="col-md-3 mb-4 mt-5" data-aos="zoom-in" data-aos-duration="1200">
+    <a href="{% url 'plant_eda5' %}" style="text-decoration: none;">
+    <div class="card text-center p-4 shadow-sm">
+      <div class="icon mb-3">
+          <i class="icofont-chart-pie-alt" style="font-size: 50px;"></i>
+      </div>
+      <h5 class="card-title">Color Channel Insights</h5>
+      <p class="card-text">View a graph showing the color channel distribution of the images.</p>
+    </div>
+    </a>
+  </div>
+  
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .section-title {
+        text-align: center;
+        font-family: 'Algerian', sans-serif;
+        background: linear-gradient(90deg,  #3ece39 , #4baf47);
+        color: white;
+        width: 60%;
+        border-radius: 30px 0px 30px 0px;
+        font-size: 2.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+        .content-card {
+            background-color: #fff;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+            padding-top: 13px !important;
+           
+        }
+
+        .content-card:hover {
+            background-color: #eec044;
+            transform: translateY(-8px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+        .content-card:hover p{
+           color:white;
+           
+        }
+        .content-card:hover i{
+           color:white;
+           
+        }
+
+        .content-card p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .content-card i {
+            font-size: 1.5rem;
+            color: #4baf47;
+        }
+
+        .questions-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .m {
+        animation: moveArrow 1s infinite alternate;
+    }
+    @keyframes moveArrow {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-10px);
+        }
+    }
+    .m2{
+        animation: moveArrow2 1s infinite alternate; 
+    }
+    @keyframes moveArrow2 {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-10px);
+        }
+    }
+
+        a {
+            text-decoration: none;
+        }
+        .para{
+            font-weight:bold !important;
+        }
+        
+        @media (max-width: 360px) {
+            body{
+                overflow-y: scroll !important;
+                overflow-x: hidden !important; 
+            }
+            .pad1{
+                padding: 0px;
+                padding-left: 0px !important;
+
+            }
+            .pad2{
+                padding: 0px;
+                padding-left: 0px !important;
+            }
+           
+
+            .section-title {
+        text-align: center;
+        font-family: 'Algerian', sans-serif;
+        background: linear-gradient(90deg,  #3ece39 , #4baf47);
+        color: white;
+        width: 80%;
+        border-radius: 30px 0px 30px 0px;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        margin-left: -90px !important;
+    }
+
+    .content-card {
+            
+            background-color: #fff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 300px;
+            height: 120px;
+            margin-left: -190px;
+        }
+        .content-card p{
+            font-size: 15px;
+        }
+            .video-container img {
+                width: 100%; /* Adjust width for mobile responsiveness */
+            }
+            .m{
+                margin-left: -90px !important;
+            }
+            .video-container{
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+<body style="background-color: rgba(238, 192, 68, 0.1);overflow-y: hidden;">
+
+    <div style="display: flex; align-items: start; font-size: 50px; position: relative;margin-top: -10px;" class="m">
+        <a href="{% url 'Crop2' %}"><i class="icofont-arrow-left back-icon ps-5" style="color: black;"></i></a>
+    </div>
+
+    <section>
+        <div style="display:flex;align-items:center;justify-content:center" >
+            <h1 class="section-title mb-5 pt-2 pb-2 " style="margin: -30px;">Analysis of Maize Production</h1>
+        </div>
+        
+        <div style="display: flex;justify-content: center;align-items: center;">
+        <div class="row pe-5 " style="width: 85%;">
+           
+            <div class="col-md-4">
+                <div class="video-container mt-3 pt-5" >
+                    <img class="m2" src="{% static 'images/Untitled_Project__2_-removebg-preview.PNG' %}" 
+                    alt="Nitrogen Analysis Image" width="450px" height="400px" style="-webkit-filter: drop-shadow(5px 5px 5px #eec044); filter: drop-shadow(5px 5px 5px #868686);">
+                </div>
+                <div class="video-container">
+                    <img src="{% static 'images/below-removebg-preview.png' %}" style="margin-left: -140px;" width="700px">
+                </div>
+            </div>
+
+            <div class="col-md-8 ps-5 pt-3">
+                <div class="questions-container ps-5" data-aos="flip-left" data-aos-duration="1000">
+                    <a href="{% url 'maize1' %}">
+                        <div class="content-card ps-3 pt-2 mb-3" >
+                            <i class="icofont-chart-bar-graph"></i>
+                            <p class="para ps-3">Maize production by a Country Over Time</p>
+                        </div>
+                    </a>
+                    <a href="{% url 'maize2' %}">
+                        <div class="content-card ps-3 pt-2 mb-3">
+                            <i class="icofont-globe"></i>
+                            <p class="para ps-3">Comparison of Maize Production Between Countries</p>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'maize3' %}">
+                        <div class="content-card ps-3 pt-2 mb-3">
+                            <i class="icofont-world"></i>
+                            <p class="para ps-3">Top Maize producing countries in Specific Year</p>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'maize4' %}">
+                        <div class="content-card ps-3 pt-2 mb-3">
+                            <i class="icofont-calendar"></i>
+                            <p class="para ps-3">Average Maize Production by Decade</p>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'maize5' %}">
+                        <div class="content-card pt-2 mb-3">
+                            <i class="icofont-chart-line nav__link-icon"></i>
+                            <p class="para ps-3">Global Maize Production in a Specific Year</p>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'maize6' %}">
+                        <div class="content-card ps-3 pt-2 mb-3">
+                            <i class="icofont-globe-alt"></i>
+                            <p class="para ps-3">Countries with the More Maize Production Over Time</p>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'maize7' %}">
+                        <div class="content-card ps-3 pt-2 mb-3">
+                            <i class="icofont-exchange"></i>
+                            <p class="para ps-3">Growth Rate of Maize Production Over Time</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+</body>
+
+</html>
+{% endblock %}

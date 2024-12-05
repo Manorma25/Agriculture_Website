@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Data</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <style>
+        /* Add your custom styles here */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+            border-bottom: 2px solid #eec044;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .text-content {
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-item {
+            font-size: 1.2rem;
+            color: #34495e;
+            margin-bottom: 10px;
+        }
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background-color: #eec044;
+            border-color: #eec044;
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: #d4a33d;
+            border-color: #d4a33d;
+            color:white
+        }
+
+        .shine {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+           .small{
+            display: none;
+
+           }
+           .small2{
+            display: block !important;
+           }
+
+           .shift{
+            padding: 0px !important;
+            margin-left: -70px;
+           }
+           .remove1{
+            display: none;
+           }
+        }
+    </style>
+</head>
+
+<body style="background-color: rgba(238, 192, 68, 0.1);">
+
+    <div class="small2" style="display: none;margin-left: -50px;">
+        <div class="row ">
+           
+            <div>
+                <div style="display: flex;flex-direction: row;">
+                    <div class="col-md-2 step">
+                        <p style="text-align: center;"><img src="{% static 'images/traveling.png' %}"
+                                style="background-color:rgba(75, 175, 71,0.4);height: 60px;border-radius: 25px;box-shadow: 0px 0px 3px 2px rgba(75, 175, 71,0.7);"
+                                class="p-3 "></p>
+                        <h6 style="text-align: center;font-weight:bold">STEP 1</h6>
+                        <p style="text-align: center;margin-top: -5px;">State</p>
+                    </div>
+                    <div class="arrow">
+                        <img src="{% static 'images/arrows.png' %}" width="50px">
+                    </div>
+                    <div class="step">
+                        <p style="text-align: center;"><img src="{% static 'images/schedule.png' %}"
+                                style="background-color:rgba(75, 175, 71,0.4);height: 60px;border-radius: 25px;box-shadow: 0px 0px 3px 2px rgba(75, 175, 71,0.7);"
+                                class="p-3 shine"></p>
+                        <h6 style="text-align: center;font-weight:bold">STEP 2</h6>
+                        <p style="text-align: center;margin-top: -5px;">Month</p>
+                    </div>
+                    <div class="arrow">
+                        <img src="{% static 'images/arrows.png' %}" width="50px">
+                    </div>
+                    <div class="step">
+                        <p style="text-align: center;"><img src="{% static 'images/wheat.png' %}"
+                                style="background-color: #eec044;height: 60px;border-radius: 25px;"
+                                class="p-3 shine"></p>
+                        <h6 style="text-align: center;font-weight:bold">STEP 3</h6>
+                        <p style="text-align: center;margin-top: -5px;">Crops</p>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row ps-5 pe-5 pt-3 small">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-8">
+                <div class="row step-row">
+                    <div class="col-md-2 step">
+                        <p style="text-align: center;"><img src="{% static 'images/traveling.png' %}"
+                                style="background-color: rgba(75, 175, 71, 0.4);height: 80px;border-radius: 25px;box-shadow: 0px 0px 3px 2px rgba(75, 175, 71,0.7);"
+                                class="p-3 "></p>
+                        <h5 style="text-align: center;font-weight:bold">STEP 1</h5>
+                        <p style="text-align: center;margin-top: -5px;">State</p>
+                    </div>
+                    <div class="col-md-3 arrow">
+                        <img src="{% static 'images/arrows.png' %}" width="100px">
+                    </div>
+                    <div class="col-md-2 step">
+                        <p style="text-align: center;"><img src="{% static 'images/schedule.png' %}"
+                                style="background-color: rgba(75, 175, 71, 0.4);height: 80px;border-radius: 25px;box-shadow: 0px 0px 3px 2px rgba(75, 175, 71,0.7);"
+                                class="p-3 "></p>
+                        <h5 style="text-align: center;font-weight:bold">STEP 2</h5>
+                        <p style="text-align: center;margin-top: -5px;">Month</p>
+                    </div>
+                    <div class="col-md-3 arrow">
+                        <img src="{% static 'images/arrows.png' %}" width="100px">
+                    </div>
+                    <div class="col-md-2 step" data-aos="flip-left" data-aos-duration="1200">
+                        <p style="text-align: center;"><img src="{% static 'images/wheat.png' %}"
+                                style="background-color: #eec044;height: 80px;border-radius: 25px;" class="p-3 shine">
+                        </p>
+                        <h5 style="text-align: center;font-weight:bold">STEP 3</h5>
+                        <p style="text-align: center;margin-top: -5px;">Crops</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-2"></div>
+        </div>
+
+        <div class="p-5 shift">
+            <h1 class="text-center display-4" style="font-family: Algerian; letter-spacing: 2px;" >Agriculture Data <span
+                    style="font-family: 'Courier New', Courier, monospace;letter-spacing: 1px;">
+                    <h5>{{ state_name }} - {{ month }}</h5>
+                </span></h1>
+
+            {% if error %}
+            <div class="alert alert-danger text-center mt-4">
+                {{ error }}
+            </div>
+            {% else %}
+            <div class="row mt-5">
+               
+                <div class="col-md-6">
+                    <div class="data-section mb-4" data-aos="zoom-in" data-aos-duration="1200">
+                        <h2 class="section-title">Crops</h2>
+                        <div class="text-content mb-4" style="height: 140px;">
+                            {% for crop in crops %}
+                            <div class="text-item">{{ crop }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="data-section mb-4" data-aos="zoom-in" data-aos-duration="1200">
+                        <h2 class="section-title">Fruits</h2>
+                        <div class="text-content mb-4" style="height: 140px;">
+                            {% for fruit in fruits %}
+                            <div class="text-item">{{ fruit }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="data-section mb-4" data-aos="zoom-in" data-aos-duration="1200">
+                        <h2 class="section-title">Vegetables</h2>
+                        <div class="text-content mb-4" style="height: 140px;">
+                            {% for vegetable in vegetables %}
+                            <div class="text-item">{{ vegetable }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="data-section mb-4" data-aos="zoom-in" data-aos-duration="1200">
+                        <h2 class="section-title">Flowers</h2>
+                        <div class="text-content mb-4" style="height: 140px;">
+                            {% for flower in flowers %}
+                            <div class="text-item">{{ flower }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-5" >
+                        <a href="{% url 'State' %}">
+                            <button class="btn  btn-lg" >Go Back To States</button>
+                        </a>
+                    </div>
+                </div>
+
+                
+                <div class="col-md-6 remove1" >
+                    <div class="image-section mb-4" data-aos="zoom-in" data-aos-duration="1200">
+                        <h2 class="section-title">Crop Images</h2>
+                        <div class="image-gallery" style="height: 140px;">
+                            {{ crop_images|safe }}
+                        </div>
+                    </div>
+
+                    <div class="image-section mb-4" data-aos="zoom-in" data-aos-duration="1200">
+                        <h2 class="section-title">Fruit Images</h2>
+                        <div class="image-gallery" style="height: 140px;">
+                            {{ fruit_images|safe }}
+                        </div>
+                    </div>
+
+                    <div class="image-section mb-4" data-aos="zoom-in" data-aos-duration="1200">
+                        <h2 class="section-title">Vegetable Images</h2>
+                        <div class="image-gallery" style="height: 140px;">
+                            {{ vegetable_images|safe }}
+                        </div>
+                    </div>
+
+                    <div class="image-section mb-4" data-aos="zoom-in" data-aos-duration="1200">
+                        <h2 class="section-title">Flower Images</h2>
+                        <div class="image-gallery" style="height: 140px;">
+                            {{ flower_images|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+
+</html>
+ {% endblock %}

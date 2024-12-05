@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ scheme.name }} - Scheme Details</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        .scheme-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .scheme-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .scheme-description {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #555;
+            text-align: justify;
+        }
+
+        .scheme-video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-back {
+            background-color: #4baf47;
+            width: 100%;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-back:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        
+        .pdf-section h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .pdf-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pdf-buttons a {
+            display: inline-block;
+           
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .pdf-buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .scheme-title {
+                font-size: 2rem;
+            }
+
+            .scheme-description {
+                font-size: 1.1rem;
+            }
+
+            .pdf-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .scheme-video {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scheme Details Section -->
+    <div class="container pt-3">
+        <div class="row pt-3">
+            <!-- Content Section -->
+            <div class="col-md-6">
+                <div class="scheme-card">
+                  
+                    <div style="display: flex;justify-content: center;align-items: center;" class="p-3 pt-1 pb-1">
+                    <img src="{{ scheme.image.url }}" alt="{{ scheme.name }}" class="scheme-image">
+                    </div>
+                    <h4 class="pt-2" style="font-weight:600;text-align: center;color:#555">{{ scheme.title }}</h4>
+                    <p class="scheme-description">{{ scheme.desc|safe }}</p>
+                    <a href="{% url 'Schemes' %}" class="btn-back">Back to Schemes</a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="pdf-section ps-5 ">
+                    <h3 style="color:#555">Download PDF <i class="icofont-file-alt" style="color:#eec044"></i> </h3>
+                    <div class="pdf-buttons">
+                        <a href="{% static 'images/p1.pdf' %}" target="_blank" class="p-2 pt-1 pb-1">
+                            <i class="icofont-file-pdf"></i>&nbsp;PDF 1
+                        </a>
+                        <a href="{% static 'images/p2.pdf' %}" target="_blank" class="p-2 pt-1 pb-1">
+                            <i class="icofont-file-pdf"></i>&nbsp;PDF 2</a>
+                        <a href="{% static 'images/p3.pdf' %}" target="_blank" class="p-2 pt-1 pb-1">
+                            <i class="icofont-file-pdf"></i>&nbsp;PDF 3</a>
+                    </div>
+                </div>
+                
+                <div class="scheme-video-section mt-4 p-5 pt-1 pb-3">
+                    <video class="scheme-video" controls autoplay loop style="border-radius: 120px 0px 0px 0px;border:3px solid #eec044">
+                        <source src="{% static 'images/vid.mp4' %}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+
+</html>
+{% endblock %}

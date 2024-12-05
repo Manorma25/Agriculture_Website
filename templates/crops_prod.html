@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Information</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .analysis {
+            background-color: #4baf47;
+            color: white;
+            border: 2px solid #4baf47;
+            width: 80%;
+            font-size: 25px;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 50px;
+        }
+
+        .analysis:hover {
+            background-color: #388e3c;
+            color: white;
+        }
+
+
+        .predict {
+            border: 2px solid #4baf47;
+        }
+
+        .predict:hover {
+            background-color: #4baf47;
+            color: white;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .card-img-top {
+            border-radius: 25px 25px 0px 0px;
+        }
+
+        .heading-design {
+            text-align: center;
+            font-family: 'Algerian', sans-serif;
+            background: linear-gradient(90deg, #eec044, #f3b700);
+            color: white;
+            width: 50%;
+            border-radius: 30px 0px 30px 0px;
+            font-size: 2.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        #w {
+            border: 2px solid #eec044;
+            background: linear-gradient(to bottom, rgb(238, 192, 68), rgba(238, 192, 68, 0.6));
+
+        }
+
+        #m {
+            border: 2px solid rgb(197, 206, 56);
+            background: linear-gradient(to bottom, rgb(197, 206, 56), rgb(197, 206, 56, 0.6));
+        }
+
+        #r {
+            border: 2px solid rgb(75, 175, 71);
+            background: linear-gradient(to bottom, rgb(75, 175, 71), rgba(75, 175, 71, 0.6))
+        }
+        
+        @media (max-width: 768px){
+
+            .container{
+               margin-left: -70px;
+            }
+            .card{
+                width: 230px;
+            }
+            .heading-design{
+                font-size: 20px;
+                width: 200px;
+                margin-left: 40px;
+                
+                
+            }
+            .card-img-top{
+                height: 100px;
+            }
+            .card-title{
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .card-text{
+                font-size: 15px;
+            }
+            .analysis{
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body style="background-color: rgba(238, 192, 68, 0.1) ">
+    <div class="container">
+        <div style="display: flex;justify-content: center;align-items: center;" data-aos="fade-down" data-aos-duration="1200">
+            <h1 class="mb-5 pt-2 pb-2 heading-design">CROP YIELD</h1>
+        </div>
+        <div class="row">
+            <!-- Wheat Card -->
+            <div class="col-md-4 p-4 pt-1" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="card"
+                    style="background: linear-gradient(to left, rgba(238, 192, 68,0.3), rgba(255, 255, 255,0.1))">
+                    <img src="{% static 'images/wheat.jpg' %}" class="card-img-top" alt="Wheat" height="250px">
+                    <div class="card-body">
+                        <h5 class="card-title">Wheat</h5>
+                        <p class="card-text">A global staple, wheat production relies on soil quality, climate,
+                            and modern farming techniques to meet food demand.
+                        </p>
+                        <div style="display: flex;justify-content: center;">
+                            <a href="{% url 'wheat_ques'%}" class="analysis" id="w">Analysis</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maize Card -->
+            <div class="col-md-4 p-4 pt-1" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="card"
+                    style="background: linear-gradient(to left, rgba(197, 206, 56,0.5), rgba(255, 255, 255,0.1));">
+                    <img src="{% static 'images/maize.jpeg' %}" class="card-img-top" alt="Maize" height="250px">
+                    <div class="card-body">
+                        <h5 class="card-title">Maize</h5>
+                        <p class="card-text"> Widely grown for food and feed, maize thrives with proper climate
+                            conditions and advanced agricultural practices.</p>
+                        <div style="display: flex;justify-content: center;">
+                            <a href="{% url 'maize_ques'%}" class="analysis" id="m">Analysis</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rice Card -->
+            <div class="col-md-4 p-4 pt-1" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="card"
+                    style="background: linear-gradient(to left, rgba(75, 175, 71,0.2), rgba(255, 255, 255,0.1))">
+                    <img src="{% static 'images/rice.jpg' %}" class="card-img-top" alt="Rice" height="250px">
+                    <div class="card-body">
+                        <h5 class="card-title">Rice</h5>
+                        <p class="card-text"> Rice is a staple for over half the world's population, relying on
+                            ample water. Its production faces threats from drought and climate change.</p>
+                        <div style="display: flex;justify-content: center;">
+                            <a href="{%url 'rice_ques'%}" class="analysis" id="r">Analysis</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

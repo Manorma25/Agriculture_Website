@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Page section style */
+        .header-section {
+            background-image: url({% static 'images/wheat.jpg' %});
+            background-size: cover;
+            height: 250px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #e3dbdb;
+            background-color: rgba(0, 0, 0, 0.4);
+            font-family: sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .header-section p {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* Blog section layout */
+        .blog-container {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 50px;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        h1 {
+            color: #2d3748;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        /* Media query for three cards in one row on larger screens */
+        @media (min-width: 992px) {
+            .blog-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Card styling */
+        .blog-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: linear-gradient(to right, rgba(75, 175, 71, 0.1), white);
+            height: 100%;
+            text-align: left;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+          
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .blog-card:hover .read-more {
+            text-decoration: underline;
+        }
+
+        /* Blog image with overlay effect */
+        .blog-image-container {
+            position: relative;
+            overflow: hidden;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.1);
+        }
+
+        /* Card content styling */
+        .blog-content {
+            padding: 1rem;
+            color: #333;
+        }
+
+        .blog-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .blog-date {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Read More button */
+        .read-more {
+            display: inline-block;
+            font-weight: bold;
+            color: #4baf47;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #3a8f3a;
+            text-decoration: underline;
+        }
+
+        .blog-author {
+            padding-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="background-image: url({%static 'images/wheat.jpg' %});background-size:cover;height: 250px;width: 100%;">
+        <div
+            style="background-color: rgba(0,0,0,0.4);height: 250px;display: flex;justify-content: center;align-items: center;">
+
+            <p class="fs-2=5" style="color:#e3dbdb;font-family: sans-serif;letter-spacing: 2px;">HOME / BLOGS</p>
+
+        </div>
+        </div>
+
+    <section class="container mt-5">
+        <h1 class="mb-4" style="text-align: center;">Latest Blogs</h1>
+        <div class="blog-container">
+            {% for i in data %}
+            <div class="blog-card" data-aos="zoom-in-down" data-aos-duration="1200">
+                <div class="blog-image-container">
+                    {% if i.image %}
+                    <img src="{{ i.image.url }}" alt="Blog Image" class="blog-image">
+                    {% else %}
+                    <img src="{% static 'images/default.jpg' %}" alt="Blog Image" class="blog-image">
+                    {% endif %}
+                </div>
+                <div class="blog-content" data-aos="zoom-in-right" data-aos-duration="1800">
+                    <h2 class="blog-title">{{ i.title }}</h2>
+                    <p class="blog-date">{{ i.date|safe }}</p>
+                    <p class="blog-snippet">{{ i.desc|truncatechars:90|safe }}</p>
+                    <div class="blog-footer d-flex justify-content-between align-items-center">
+                        <a href="{% url 'blog_detail' i.id %}" class="read-more" target="_blank">Read More <i class="icofont-arrow-right"></i></a>
+                        <p class="blog-author" style="margin-left: auto;"><i class="icofont-ui-user" style="color:#eec044;font-size: 12px;border-radius: 50%;background: #333;padding: 4px;color:white"></i> {{ i.by }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+
+{% endblock %}

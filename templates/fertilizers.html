@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Information</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        .card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        .analysis {
+            width: 100%;
+            background-color: #4baf47;
+            color: white;
+            border:2px solid #4baf47;
+        }
+        .analysis:hover {
+            background-color: #388e3c;
+            color:white;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card{
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: 0.5s;
+            cursor: pointer;
+        }
+        .card-img-top{
+            border-radius: 25px 25px 0px 0px;
+        }
+        .heading-design {
+        text-align: center;
+        font-family: 'Algerian', sans-serif;
+        background: linear-gradient(90deg, #eec044, #f3b700);
+        color: white;
+        width: 50%;
+        border-radius: 30px 0px 30px 0px;
+        font-size: 2.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    @media (max-width: 768px) {
+
+        .heading-design {
+        text-align: center;
+        font-family: 'Algerian', sans-serif;
+        background: linear-gradient(90deg, #eec044, #f3b700);
+        color: white;
+        width: 90%;
+        border-radius: 30px 0px 30px 0px;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+        .fert{
+            display: none;
+        }
+
+        .container{
+            padding: 0px !important;
+            margin-left: -30px;
+        }
+
+        .card-img-top{
+            height: 140px;
+        }
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        .card-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+
+    }
+       
+    </style>
+</head>
+<body style=" background-color: rgba(238, 192, 68, 0.1) ">
+    <div class="container">
+        <div style="display: flex;justify-content: center;align-items: center;" data-aos="fade-down" data-aos-duration="1200">
+            <h1 class="mb-5 pt-2 pb-2 heading-design"><img src="{%static 'images/npk.png' %}" height="40px" class="fert">   FERTILIZERS
+                <img src="{%static 'images/npk.png' %}" height="40px" class="fert">
+            </h1>
+        </div>
+        <div class="row">
+            <!-- Wheat Card -->
+            <div class="col-md-4 p-4 pt-1" data-aos="zoom-in" data-aos-duration="1200" >
+                <div class="card">
+                    <img src="{% static 'images/nitrogen.webp' %}" class="card-img-top" alt="Wheat" height="250px">
+                    <div class="card-body">
+                        <h5 class="card-title">Nirogen</h5>
+                        <p class="card-text">Nitrogen fertilizers boost leaf development and improve overall crop yield.
+
+                        </p>
+                        <a href="{% url 'fertilizer_ques'%}" class="btn analysis">Analysis</a>&nbsp;&nbsp;
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maize Card -->
+            <div class="col-md-4 p-4 pt-1" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="card">
+                    <img src="{% static 'images/potassium.jpg' %}" class="card-img-top" alt="Maize" height="250px">
+                    <div class="card-body">
+                        <h5 class="card-title">Potassium</h5>
+                        <p class="card-text">Potassium fertilizers strengthen plant roots and enhance fruit quality by regulating nutrient uptake.</p>
+                       
+                            <a href="{% url 'potassium_ques'%}" class="btn analysis">Analysis</a>&nbsp;&nbsp;
+                            
+                    
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rice Card -->
+            <div class="col-md-4 p-4 pt-1" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="card">
+                    <img src="{% static 'images/phosphorus.webp' %}" class="card-img-top" alt="Rice" height="250px">
+                    <div class="card-body">
+                        <h5 class="card-title">Phosphorus</h5>
+                        <p class="card-text"> Phosphorus fertilizers promote healthy root systems and increase growth in crops.</p>
+                       
+                        <a href="{%url 'phosphorus_ques'%}" class="btn analysis">Analysis</a>&nbsp;&nbsp;
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
+

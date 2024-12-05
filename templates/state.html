@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        /* .states-btn {
+    width: 200px;
+    background: #c5ce38;
+    color: white;
+    border-radius: 100px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #a4b02d;
+    transition: background 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.states-btn:hover {
+    background: #eec044;
+    color:white;
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.shine{
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0px 4px 10px rgba(0, 0, 0, 0.2);
+} */
+
+
+
+        /* CSS */
+        .states-btn {
+            background-color: #c5ce38;
+            border: 0;
+            border-radius: 56px;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            outline: 0;
+            padding: 16px 21px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            transition: all .3s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: 200px
+        }
+
+        .states-btn:before {
+            background-color: initial;
+            background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 70%);
+            border-radius: 125px;
+            content: "";
+            height: 50%;
+            left: 4%;
+            opacity: .5;
+            position: absolute;
+            top: 0;
+            transition: all .3s;
+            width: 92%;
+        }
+
+        .states-btn:hover {
+            box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+            transform: scale(1.05);
+            background: #eec044;
+            color: white;
+        }
+        .shine {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow-y: scroll !important;
+            }
+            .state1{
+                display: none;
+            }
+            .shine {
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+           
+
+            .states-btn {
+                padding: 5px 0px !important;
+                width: 135px;
+                font-size: 15px;
+
+            }
+            .small2{
+                display: block !important;
+            }
+            .state3{
+                margin-left: -80px;
+            }
+            .shift{
+                padding-left: 0px !important;
+                margin-left: -30px !important;
+            }
+            
+
+        }
+    </style>
+
+    <script type="text/javascript">
+        (function () {
+            // Function to prevent back navigation
+            var preventBack = function () {
+                window.history.forward();
+            };
+
+            // Modify the browser history state when the page loads
+            window.onload = function () {
+                preventBack(); // Prevent backward navigation on page load
+
+                // Push a state to override the current page in history, so back won't work
+                window.history.pushState(null, null, window.location.href);
+            };
+
+            // Re-apply history push on page show if page was cached
+            window.onpageshow = function (evt) {
+                if (evt.persisted) {
+                    window.history.pushState(null, null, window.location.href);
+                }
+            };
+
+            // Ensure the page can't be unloaded via back navigation
+            window.onunload = function () { };
+        })();
+    </script>
+</head>
+
+<body style="background-color: rgba(238, 192, 68, 0.1);">
+
+    <div class="small2" style="display: none;margin-left: -50px;">
+        <div class="row ">
+           
+            <div>
+                <div style="display: flex;flex-direction: row;">
+                    <div class="col-md-2 step">
+                        <p style="text-align: center;"><img src="{% static 'images/traveling.png' %}"
+                                style="background-color: #eec044;height: 60px;border-radius: 25px;"
+                                class="p-3 shine"></p>
+                        <h6 style="text-align: center;font-weight:bold">STEP 1</h6>
+                        <p style="text-align: center;margin-top: -5px;">State</p>
+                    </div>
+                    <div class="arrow">
+                        <img src="{% static 'images/arrows.png' %}" width="50px">
+                    </div>
+                    <div class="step">
+                        <p style="text-align: center;"><img src="{% static 'images/schedule.png' %}"
+                                style="background-color: rgba(238, 192, 68,0.5);height: 60px;border-radius: 25px;"
+                                class="p-3"></p>
+                        <h6 style="text-align: center;font-weight:bold">STEP 2</h6>
+                        <p style="text-align: center;margin-top: -5px;">Month</p>
+                    </div>
+                    <div class="arrow">
+                        <img src="{% static 'images/arrows.png' %}" width="50px">
+                    </div>
+                    <div class="step">
+                        <p style="text-align: center;"><img src="{% static 'images/wheat.png' %}"
+                                style="background-color: rgba(238, 192, 68,0.5);height: 60px;border-radius: 25px;"
+                                class="p-3"></p>
+                        <h6 style="text-align: center;font-weight:bold">STEP 3</h6>
+                        <p style="text-align: center;margin-top: -5px;">Crops</p>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+
+    <div class="s">
+        <div class="container ">
+            <div class="row ps-5 pe-5 pt-3 state1">
+                <div class="col-12 col-md-2"></div>
+                <div class="col-12 col-md-8">
+                    <div class="row step-row">
+                        <div class="col-md-2 step" data-aos="flip-left" data-aos-duration="1200">
+                            <p style="text-align: center;"><img src="{% static 'images/traveling.png' %}"
+                                    style="background-color: #eec044;height: 80px;border-radius: 25px;"
+                                    class="p-3 shine"></p>
+                            <h5 style="text-align: center;font-weight:bold">STEP 1</h5>
+                            <p style="text-align: center;margin-top: -5px;">State</p>
+                        </div>
+                        <div class="col-md-3 arrow">
+                            <img src="{% static 'images/arrows.png' %}" width="100px">
+                        </div>
+                        <div class="col-md-2 step">
+                            <p style="text-align: center;"><img src="{% static 'images/schedule.png' %}"
+                                    style="background-color: rgba(238, 192, 68,0.5);height: 80px;border-radius: 25px;"
+                                    class="p-3"></p>
+                            <h5 style="text-align: center;font-weight:bold">STEP 2</h5>
+                            <p style="text-align: center;margin-top: -5px;">Month</p>
+                        </div>
+                        <div class="col-md-3 arrow">
+                            <img src="{% static 'images/arrows.png' %}" width="100px">
+                        </div>
+                        <div class="col-md-2 step">
+                            <p style="text-align: center;"><img src="{% static 'images/wheat.png' %}"
+                                    style="background-color: rgba(238, 192, 68,0.5);height: 80px;border-radius: 25px;"
+                                    class="p-3"></p>
+                            <h5 style="text-align: center;font-weight:bold">STEP 3</h5>
+                            <p style="text-align: center;margin-top: -5px;">Crops</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2"></div>
+            </div>
+
+            <div class="state3" >
+            <h1 style="text-align: center;font-family: algerian;" class="pt-2 pb-4">Select State</h1>
+            <div class="container">
+                <div class="row ps-5 shift" data-aos="zoom-in" data-aos-duration="1200">
+                    {% for state in states %}
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 pb-3">
+                        <a href="{% url 'month' state.id %}" class="btn p-2 states-btn">{{ state.name }}</a>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% endblock %}

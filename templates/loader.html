@@ -1,0 +1,201 @@
+
+{% block content %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitrogen Usage in Agriculture</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+ body {
+            font-family: 'Montserrat', sans-serif;
+            color: #2d3e50; 
+        }
+
+      
+        .container {
+            background-color: #f6f6f6;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #4baf47;
+        }
+
+       
+        .form-section {
+            background-color: white;
+            padding: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #ebedf2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+           
+        }
+
+        .form-section h5 {
+            
+            font-weight: 600;
+            color: #2d3e50;
+        }
+
+        .heading-design {
+        text-align: center;
+        font-family: 'Algerian', sans-serif;
+        background: linear-gradient(90deg, #eec044, #f3b700);
+        color: white;
+        width: 80%;
+        border-radius: 30px 0px 30px 0px;
+        font-size: 2.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .m {
+       
+       animation: moveArrow 1s infinite alternate, glow 1.5s infinite;
+   }
+
+   .button {
+            background-color: #4baf47;
+            color: white;
+            padding: 12px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            margin-top: 17px;
+        }
+
+        .button:hover {
+            background-color: #44a341;
+        }
+
+   /* Animation for moving the arrow */
+   @keyframes moveArrow {
+       0% {
+           transform: translateX(0);
+       }
+       100% {
+           transform: translateX(-10px);
+       }
+   }
+   a{
+    color:black;
+    text-decoration:none
+   }
+   input:focus{
+    border: 2px solid #4baf47 !important;
+    outline: none !important;
+   }
+   
+
+   .loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensures it appears on top of everything */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.loader-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+   
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .info {
+                flex-direction: column;
+            }
+
+            .info-content {
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .form-section {
+                margin-top: 30px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loader = document.getElementById("loader");
+        
+            // Show loader when a link is clicked
+            document.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", event => {
+                    if (link.target === "_blank") return; // Skip if opening in a new tab
+                    
+                    event.preventDefault(); // Prevent immediate navigation
+        
+                    // Show loader and wait 5 seconds before navigating
+                    loader.classList.add("show");
+                    setTimeout(() => {
+                        window.location.href = link.href; // Navigate to the link after 5 seconds
+                    }, 2000); // 5 seconds delay
+                });
+            });
+        
+            // Show loader when the form is submitted
+            const form = document.querySelector("form");
+            if (form) {
+                form.addEventListener("submit", event => {
+                    event.preventDefault(); // Prevent immediate form submission
+                    
+                    // Show loader
+                    loader.classList.add("show");
+        
+                    // Allow form submission to proceed after a 7-second delay
+                    setTimeout(() => {
+                        form.submit(); // Submit the form after 7 seconds
+                    }, 2000); // 7 seconds delay
+                });
+            }
+        
+            // Hide loader after page loads
+            window.addEventListener("load", () => {
+                loader.classList.remove("show");
+            });
+        });
+        
+        
+        </script>
+    </head>
+
+    <body>
+        <div id="loader" class="loader-overlay">
+            <img src="{%static 'images/loader.gif' %}" alt="Loading..." height="200px" width="200px" style="border-radius: 50%;">
+        </div>
+
+    </body>
+    </html>
+
+    {% endblock %}

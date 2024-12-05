@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'sidebar.html' %}
+    {% block content %}
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    
+    <title>Plant Disease EDA</title>
+    <style>
+       .toggle-btn {
+    padding: 8px 24px; /* Padding for a larger clickable area */
+    border: none; /* Remove default border */
+    border-radius: 30px; /* Rounded corners */
+    color: white; /* Text color */
+    background-color: #eec044; /* Button background color */
+    font-size: 18px; /* Larger font size for better readability */
+    font-weight: bold; /* Bold text for emphasis */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.toggle-btn:hover {
+    background-color: #4baf47; /* Change background color on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+
+        .image-container {
+            text-align: center;
+          
+        }
+
+        img {
+            max-width: 100%; 
+            height: auto; 
+        }
+        .back-btn {
+    /* Make it behave like a button */
+    padding: 8px 54px; /* Padding for a larger clickable area */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    color: white; /* Text color */
+    font-size: 18px; /* Font size */
+    font-weight: bold; /* Bold text for emphasis */
+    background: linear-gradient(135deg, #6ebc6b, #3e9a3a); /* Gradient background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+}
+
+/* Keyframes for the hover animation */
+@keyframes hoverEffect {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Hover state for the Back button */
+.back-btn:hover {
+    animation: hoverEffect 0.6s ease; /* Apply hover animation */
+    text-decoration: none; /* Prevent underline on hover */
+}
+
+@media(max-width:786px){
+    .eda2{
+        margin-left: -70px !important;
+        margin: 50px;
+        width: 290px;
+        margin-bottom: 0px !important;
+    }
+    .eda2 h1{
+        font-size: 1.5rem !important;
+    }
+    .toggle-btn{
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+
+    </style>
+    <script>
+        function showImage(set) {
+            // Hide both images
+            document.getElementById('train_img').style.display = 'none';
+            document.getElementById('valid_img').style.display = 'none';
+            
+            // Show the image based on the button clicked
+            if (set === 'train') {
+                document.getElementById('train_img').style.display = 'block';
+            } else if (set === 'valid') {
+                document.getElementById('valid_img').style.display = 'block';
+            }
+        }
+
+        // Ensure that the training image shows by default on page load
+        window.onload = function() {
+            showImage('train');
+        };
+    </script>
+</head>
+
+<body>
+    <section >
+        <div class="eda2" style="background: linear-gradient(135deg, rgba(75, 175, 71, 0.5), rgba(238, 192, 68, 0.5)); border-radius: 10px;">
+    <h1 class="pt-3" style="text-align: center;  font-weight: 700;
+    font-size: 2.5rem;
+    color: #fff;">Image Distribution in Training and Validation Sets</h1>
+
+<div style="display: flex; justify-content: center; gap: 25px;" class="pt-4"> <!-- Flex container with gap -->
+    <!-- Buttons to toggle between the Training and Validation sets -->
+    <button class="toggle-btn" onclick="showImage('train')">Training Set</button>
+    <button class="toggle-btn" onclick="showImage('valid')">Validation Set</button>
+</div>
+
+    <div class="image-container">
+        <div style="display: flex;justify-content: center;" class="pt-3">
+        <!-- Training Set Image (shown by default) -->
+        <img id="train_img" src="data:image/png;base64,{{ train_plot }}" alt="Training Set Distribution">
+        
+        <!-- Validation Set Image (hidden by default) -->
+        <img id="valid_img" src="data:image/png;base64,{{ valid_plot }}" alt="Validation Set Distribution" style="display: none;">
+        </div>
+    </div>
+
+    <div style="display: flex;justify-content: center;margin-top: -20px;" class="pb-3">
+        <a href="{% url 'plant_eda' %}" class="back-btn" style="text-align: center;text-decoration: none;">
+            <i class="icofont icofont-arrow-left"></i>
+            Go Back
+            </a>
+            </div>
+            </div>
+    </section>
+</body>
+
+</html>
+
+{% endblock %} 

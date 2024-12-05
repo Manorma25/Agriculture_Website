@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'sidebar.html' %}
+    {% block content %}
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    
+    <title>Plant Disease EDA</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #4baf47; /* Your primary color */
+        }
+        
+
+        form {
+            max-width: 600px; /* Set a max width for the form */
+            margin: 20px auto; /* Center the form */
+            padding: 20px;
+            border: 2px solid #eec044; /* Use your secondary color */
+            border-radius: 10px; /* Rounded corners */
+            background-color: white; /* White background for the form */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        label {
+            display: block; /* Make the label take the full width */
+            margin-bottom: 10px; /* Space between label and select */
+            font-weight: bold; /* Bold text for better visibility */
+            color: #333; /* Dark color for text */
+        }
+
+        select {
+            width: 100%; /* Full width for the select box */
+            padding: 10px; /* Padding for better touch targets */
+            margin-bottom: 20px; /* Space below the select box */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 16px; /* Larger font for better readability */
+        }
+
+        .b {
+            width: 100%; /* Full width for the button */
+            padding: 10px; /* Padding for the button */
+            background-color: #4baf47; /* Your primary color */
+            color: white; /* White text */
+            border: none; /* Remove default border */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 16px; /* Larger font */
+            cursor: pointer; /* Change cursor to pointer */
+            transition: background-color 0.3s; /* Transition effect */
+        }
+
+        .b:hover {
+            background-color: #eec044; /* Change background on hover */
+        }
+
+        p.error {
+            color: red; /* Color for error messages */
+            text-align: center; /* Center the error message */
+            margin-top: 10px; /* Space above the error message */
+        }
+
+        h2 {
+            text-align: center; /* Center the h2 heading */
+            color: #454545;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .image-container {
+            display: flex; /* Use flexbox for the image container */
+            flex-wrap: wrap; /* Allow images to wrap */
+            justify-content: center; /* Center the images */
+            gap: 10px; /* Space between images */
+            margin-top: 20px; /* Space above the image container */
+        }
+
+        .im {
+            width: 250px; /* Image width */
+            height: 250px; /* Image height */
+            border-radius: 5px; /* Rounded corners for images */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for images */
+            margin: 0; /* Remove any margin around images */
+        }
+
+        .initial-image {
+            text-align: center; /* Center the initial image */
+            margin: 20px 0; /* Space around the image */
+        }
+
+        /* Loader spinner style */
+        .loader {
+            display: none;
+            border: 6px solid #f3f3f3; /* Light grey */
+            border-top: 6px solid #4baf47; /* Your primary color */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media(max-width:786px){
+            section{
+                margin-left: -60px;
+                height: auto !important;
+                width: 275px;
+            }
+            h1{
+                font-size: 40px !important;
+            }
+            .ime{
+                height: 40px;
+                width: 40px;
+            }
+            .im {
+            width: 150px; /* Image width */
+            height: 150px; /* Image height */
+            border-radius: 5px; /* Rounded corners for images */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for images */
+            margin: 0; /* Remove any margin around images */
+        }
+        h2{
+            font-size: 15px;
+            width: 140px !important;
+        }
+       
+
+select option {
+ 
+  font-size: 8px ; 
+
+}  
+   
+        }
+    </style>
+    <script>
+      $(document).ready(function() {
+    {% if image_data %}
+        $('.initial-image').hide(); // Hide initial image if there's image data
+        $('.image-container').show(); // Show images
+        $('h2').show(); // Show class name
+    {% else %}
+        $('.image-container').hide(); // Hide images if there's no data
+        $('h2').hide(); // Hide class name if no data
+    {% endif %}
+
+    // Form submission handler
+    $('form').on('submit', function(event) {
+        $('.initial-image').hide(); // Hide the initial image
+        $('.image-container').hide(); // Hide existing images
+        $('h2').hide(); // Hide class name
+        $('.loader').show(); // Show the loader spinner
+
+        // Allow the form to submit
+        this.submit();
+    });
+});
+
+    </script>
+</head>
+<body>
+    <section style="background: linear-gradient(135deg, rgba(75, 175, 71, 0.5), rgba(238, 192, 68, 0.5)); border-radius: 10px;height: 680px;">
+        <div class="container pt-5 pb-5">
+            
+            <h1 style="font-weight: 700; font-size: 3.5rem; color: #fff;">Visualize Leaves<img class="ime" src="{% static 'images/leaf-01.webp' %} " style="margin-top:-20px ;"></h1>
+
+            <!-- Form for selecting a class -->
+            <form method="POST">
+                {% csrf_token %}
+                <label for="class_index">Select Class:</label>
+                <select name="class_index" id="class_index">
+                    {% for class_name in class_names %}
+                    <option value="{{ forloop.counter0 }}">{{ class_name }}</option>
+                    {% endfor %}
+                </select>
+                <div style="display: flex; flex-direction: row; gap: 10px;"> <!-- Add gap here -->
+                    <button class="b" type="submit">Visualize</button>
+                    <a href="{% url 'plant_eda' %}" class="b" style="text-align: center;text-decoration: none;">
+                    Back
+                    </a>
+                </div>
+                
+            </form>
+
+            <!-- Initial image to display -->
+            <div class="initial-image pt-4">
+                <img src="{% static 'images/plant (6).png' %}" alt="Initial Image" style="width: 250px; height: auto;">
+            </div>
+
+            <!-- Loader spinner -->
+            <div class="loader"></div>
+
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
+            
+            {% if image_data %}
+    
+            <h2>{{ class_name }}</h2>
+         
+            <div class="image-container">
+                {% for img_uri in image_data %}
+                <img class="im" src="data:image/png;base64,{{ img_uri }}">
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</body>
+</html>
+
+{% endblock %}

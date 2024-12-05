@@ -1,0 +1,307 @@
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitrogen Usage in Agriculture</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+           
+            color: #2d3e50;
+           
+        }
+
+      
+        .container {
+            background-color: #f6f6f6;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #4baf47;
+        }
+
+        .info {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .info h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #34495e !important;
+        }
+
+        .info p {
+            font-size: 1rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        .info-content {
+            flex: 2;
+        }
+
+        .image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-wrapper img {
+            
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            background-color: white;
+            padding: 30px;
+            padding-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ebedf2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+           
+        }
+
+        .form-section h5 {
+            
+            font-weight: 600;
+            color: #2d3e50;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 2px solid #4baf47;
+            background-color: #ffffff;
+            font-size: 1rem;
+            color: #2d3e50;
+        }
+      
+        select:hover,
+        select:focus {
+            border-color: #4baf47;
+        }
+
+        .button {
+            background-color: #4baf47;
+            color: white;
+            padding: 12px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #44a341;
+        }
+
+       
+        .heading-design {
+        text-align: center;
+        font-family: 'Algerian', sans-serif;
+        background: linear-gradient(90deg, #eec044, #f3b700);
+        color: white;
+        width: 80%;
+        border-radius: 30px 0px 30px 0px;
+        font-size: 2.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .m {
+       
+       animation: moveArrow 1s infinite alternate, glow 1.5s infinite;
+   }
+
+   /* Animation for moving the arrow */
+   @keyframes moveArrow {
+       0% {
+           transform: translateX(0);
+       }
+       100% {
+           transform: translateX(-10px);
+       }
+   }
+   a{
+    color:black;
+    text-decoration:none
+   }
+   #n:focus {
+    outline: none;
+    box-shadow: none;
+}
+   
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .info {
+                flex-direction: column;
+            }
+
+            .info-content {
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .form-section {
+                margin-top: 30px;
+            }
+
+             .m{
+                margin-left: -90px !important;
+            }
+
+            .heading-design {
+        text-align: center;
+        font-family: 'Algerian', sans-serif;
+        background: linear-gradient(90deg, #eec044, #f3b700);
+        color: white;
+        width: 100%;
+        border-radius: 30px 0px 30px 0px;
+        font-size: 1.0rem !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        margin-left: -70px !important;
+    }
+            .container {
+                flex-direction: column;
+                width: 130% !important;
+                margin-left: -65px !important;
+                padding: 10px !important;
+               
+            }
+
+            .info {
+                margin-bottom: 20px;
+                margin-right: 0;
+            }
+
+            .form-section {
+           margin-top: -1px ;
+           padding: 10px;
+           
+        }
+
+            option {
+                font-size: 9px;
+            }
+            
+            .info {
+                margin-bottom: 20px;
+                margin-right: 0;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .button {
+                font-size: 0.9rem;
+            }
+            .image-wrapper img {
+            
+            width: 250px;
+        }
+        }
+    </style>
+      <script>
+        function validateNumber() {
+       var num = document.getElementById('n').value;
+
+       if (num > 10) {
+           alert("The number is greater than 10. Please enter a number between 1 and 10.");
+           return false;  // Prevent form submission
+       }
+
+       return true;  // Allow form submission if the number is valid
+   }
+     </script>
+</head>
+
+<body style="background-color: rgba(238, 192, 68, 0.1);">
+    <div>
+        {% include 'loader.html' %}
+    </div>
+    <div style="display: flex; align-items: start; font-size: 50px; position: relative;margin-top: -10px;" class="m">
+        <a href="{% url 'rice_ques' %}"><i class="icofont-arrow-left back-icon ps-5"></i></a>
+    </div>
+   
+    <div style="display: flex;justify-content: center;align-items: center; margin-top: -30px;">
+        <h2 class="mb-3 pb-2 heading-design pt-2">Rice Usage in a Country Over Time</h2>
+    </div>
+
+    <div class="container mt-4">
+    
+        <!-- Form Section -->
+        <div class="form-section ">
+            <h5 style="color:#34495e">Select year : </h5>
+            <form action="" method="POST" onsubmit="return validateNumber()">
+                {% csrf_token %}
+                <select name="year" >
+                    {% for i in years %}
+                    <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                        <div class="form-group pt-2">
+                            <h5 style="color:#34495e">Select number of countries : </h5>
+                            <input type="number" id="n" name="n" class="form-control form-control-lg mb-3 "
+                                placeholder="Enter number of countries: (value should between 1-10)" required style="border: 1px solid #4baf47;" >
+                        </div>
+                <button type="submit" class="button">Submit</button>
+            </form>
+        </div>
+        <!-- Info Section -->
+        <div class="info mt-4">
+            <div class="image-wrapper">
+                <img src="{% static 'images/w.gif' %}" alt="Nitrogen Usage Image" height="180px">
+            </div>
+            <div class="info-content">
+                <h3>About Rice Production</h3>
+                <p style="text-align: justify;">
+                    Rice is a staple food for more than half of the world's population, especially in Asia. 
+                    Its production is highly dependent on water availability, resulting to changes in 
+                    rainfall patterns and drought. Irrigation techniques have improved rice production, 
+                    but challenges such as climate change and other factors continue to threaten sustainable production.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#country-select').select2({
+                placeholder: 'Select countries',
+                width: '100%',
+
+            });
+        });
+    </script>
+</body>
+
+</html>
+{% endblock %}

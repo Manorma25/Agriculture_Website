@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phosphate Use Prediction</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        /* Header Design */
+        .heading-design {
+            text-align: center;
+            font-family: 'Algerian', sans-serif;
+            background: linear-gradient(90deg, #4baf47, #eec044);
+            color: white;
+            padding: 20px;
+            width: 100%;
+            border-radius: 15px;
+            font-size: 2.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        /* Card Hover Effects */
+        .hover-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-radius: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .hover-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(12, 156, 7, 0.5);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-icon {
+            margin-bottom: 15px;
+        }
+
+        /* Button Design */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .btn-custom {
+            background-color: #4baf47;
+            border: none;
+            color: white;
+        }
+        .btn-custom2 {
+            background-color: #eec044;
+            border: none;
+            color: white;
+        }
+        .btn-custom2:hover {
+            background-color: #d6a728;
+            color:white
+        }
+
+        .btn-custom:hover {
+            background-color: #3a9c3b;
+            color:white
+        }
+
+        /* Text and Typography */
+        .card-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            font-family: "roboto";
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Icon Styling */
+        .icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        body {
+            background-color: rgba(238, 192, 68, 0.1);
+        }
+
+        @media (max-width:768px){
+            .container{
+                margin-left: -60px;
+            }
+            .heading-design{
+                font-size: 20px;
+                margin-left: 30px;
+            }
+            .card-title{
+                font-size: 20px;
+            }
+            .card-text{
+                font-size: 15px;
+            }
+            .card{
+                width: 230px;
+            }
+            .btn-custom{
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body style="background-color: rgba(238, 192, 68, 0.1);">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="text-center mt-4" data-aos="fade-down" data-aos-duration="1200">
+            <h2 class="heading-design">Forecasting Agricultural Performance</h2>
+        </div>
+
+        <!-- Cards Row -->
+        <div class="row mt-3">
+            <!-- Crop Prediction Card -->
+            <div class="col-md-6 mb-4 p-3" data-aos="zoom-in-up" data-aos-duration="600">
+                <div class="card hover-card pt-4 pb-4" style="box-shadow: 0 0 20px rgba(12, 156, 7, 0.2);background: linear-gradient(to bottom, white, rgba(75, 175, 71,0.3));">
+                    <div class="card-body text-center">
+                        <div class="icon-wrapper">
+                            <img src="{% static 'images/plant (4).png' %}" height="100px" alt="Plant Icon">
+                        </div>
+                        <h5 class="card-title">Crop Yields<i class="icofont-leave"></i></h5>
+                        <p class="card-text">Analyze trends to predict future crop production and optimize yields for the coming years</p>
+                        <a href="{% url 'crop_pred' %}" class="btn btn-custom"><i class="icofont-chart-line-alt"></i> Make Predictions</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fertilizer Prediction Card -->
+            <div class="col-md-6 mb-4 p-3" data-aos="zoom-in-up" data-aos-duration="1200">
+                <div class="card hover-card pt-4 pb-4" style="box-shadow: 0 0 20px rgba(12, 156, 7, 0.2);background: linear-gradient(to bottom, rgb(255, 255, 255), rgba(238, 192, 68, 0.2));">
+                    <div class="card-body text-center">
+                        <div class="icon-wrapper">
+                            <img src="{% static 'images/plant (3).png' %}" height="100px" alt="Fertilizer Icon">
+                        </div>
+                        <h5 class="card-title">Fertilizer Usage</h5>
+                        <p class="card-text">Explore fertilizer use trends over time and make informed predictions for future results.</p>
+                        <a href="{% url 'fertilizer_pred' %}" class="btn btn-custom2"><i class="icofont-chart-line-alt"></i> Make Predictions</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock %}

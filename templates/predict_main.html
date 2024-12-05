@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phosphate Use Prediction</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        body {
+            background-color: #f7fafc; /* Light background */
+        }
+        .card {
+            border: none; /* Remove border */
+            border-radius: 10px; /* Rounded corners */
+            transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: center; /* Center text */
+            color: #34495e; /* Text color */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Lift on hover */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+        }
+        .card img {
+           /* Fixed height */
+            object-fit: cover; /* Maintain aspect ratio */
+            margin-bottom: 15px; /* Space below image */
+        }
+        .card-body {
+            padding: 20px; /* Padding for text */
+        }
+        h1 {
+            font-size: 2.5rem; /* Larger title */
+            font-weight: bold; /* Bold title */
+            margin-bottom: 30px; /* Spacing below title */
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Make Predictions</h1>
+        <div class="row">
+            <!-- First Row -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm pt-3" style="background: rgba(75, 175, 71, 0.4);display: flex;align-items: center;">
+                    <img src="{% static 'images/plant (2).png' %}" alt="Crop Yield" height="100px" width="100px"/>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: 600;">Wheat</h5>
+                        <p class="card-text">Analyze crop yield data to make accurate predictions and improve productivity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm pt-3" style="background: rgba(75, 175, 71, 0.4);display: flex;align-items: center;">
+                    <img src="{% static 'images/plant (2).png' %}" alt="Crop Yield" height="100px" width="100px"/>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: 600;">Rice</h5>
+                        <p class="card-text">Analyze crop yield data to make accurate predictions and improve productivity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm pt-3" style="background: rgba(75, 175, 71, 0.4);display: flex;align-items: center;">
+                    <img src="{% static 'images/plant (2).png' %}" alt="Crop Yield" height="100px" width="100px"/>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: 600;">Maize</h5>
+                        <p class="card-text">Analyze crop yield data to make accurate predictions and improve productivity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Second Row -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm pt-3" style="background: rgba(75, 175, 71, 0.4);display: flex;align-items: center;">
+                    <img src="{% static 'images/plant (2).png' %}" alt="Crop Yield" height="100px" width="100px"/>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: 600;">Phosphorus</h5>
+                        <p class="card-text">Analyze crop yield data to make accurate predictions and improve productivity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm pt-3" style="background: rgba(75, 175, 71, 0.4);display: flex;align-items: center;">
+                    <img src="{% static 'images/plant (2).png' %}" alt="Crop Yield" height="100px" width="100px"/>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: 600;">Potassium</h5>
+                        <p class="card-text">Analyze crop yield data to make accurate predictions and improve productivity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm pt-3" style="background: rgba(75, 175, 71, 0.4);display: flex;align-items: center;">
+                    <img src="{% static 'images/plant (2).png' %}" alt="Crop Yield" height="100px" width="100px"/>
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: 600;">Nitrogen</h5>
+                        <p class="card-text">Analyze crop yield data to make accurate predictions and improve productivity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

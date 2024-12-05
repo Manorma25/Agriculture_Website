@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: rgba(238, 192, 68, 0.1) !important;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .col-md-12.con {
+            max-width: 450px;
+            background-color: white;
+            padding: 25px;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+            color: #333;
+            text-align: center;
+        }
+
+        .col-md-12 img {
+            border-radius: 50%;
+            border: 4px solid #eec044;
+            margin-bottom: 20px;
+            width: 130px;
+            height: 130px;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .profile-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .profile-item i {
+            margin-right: 12px;
+            font-size: 20px;
+            color: #4baf47;
+        }
+
+        .profile-item span {
+            color: #555;
+        }
+
+        .btn-edit {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: white;
+            background-color: #4baf47;
+            padding: 8px 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        
+        .btn-edit:hover {
+            background-color: #3b8f38;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: 0.5px solid #b9b9b9;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+           
+        }
+
+        @media (max-width: 768px) {
+            .col-md-12.con {
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .btn-edit {
+                top: 15px;
+                right: 15px;
+            }
+            .im{
+                margin-left: -50px;
+                height: 60px !important;
+                width: 60px !important;
+            }
+            .main{
+                margin-top: 50px !important;
+                padding-bottom: 0x !important;
+                margin-bottom: 0px !important;
+                margin-left: -75px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row main" data-aos="zoom-in" data-aos-duration="800">
+        <div class="col-md-12 con position-relative">
+            <a href="{%url 'Edit Profile' %}" class="btn-edit">
+                <i class="icofont-edit"></i>&nbsp;&nbsp;Edit Profile
+            </a>
+            <div >
+                {% if user.profileimg %}
+                <img src="{{user.profileimg.url}}" class="im">
+                {% else %}
+                <img src="{% static 'images/r3.jpeg' %}" alt="Profile Image" class="im">
+                {% endif %}
+                <h3>{{ user.name }}</h3>
+                <p style="color: #777; font-size: 14px;">{{ user.email }}</p>
+            </div>
+            <hr>
+
+            <p class="section-title">Personal Information</p>
+
+            <div class="c">
+                <div class="profile-item">
+                    <i class="icofont-envelope"></i>
+                    <span>{{ user.email }}</span>
+                </div>
+
+                <div class="profile-item">
+                    <i class="icofont-calendar"></i>
+                    <span><span style="color: #a0a0a0;">D.O.B : </span>{{ user.dob }}</span>
+                </div>
+
+                <div class="profile-item">
+                    <i class="icofont-user"></i>
+                    <span><span style="color: #a0a0a0;">Sex : </span>{{ user.gender }}</span>
+                </div>
+
+                <div class="profile-item">
+                    <i class="icofont-phone"></i>
+                    <span><span style="color: #a0a0a0;">Cell : </span>{{ user.phone }}</span>
+                </div>
+
+                <hr>
+                <p class="section-title">Address</p>
+
+                <div class="profile-item">
+                    <i class="icofont-globe"></i>
+                    <span><span style="color: #a0a0a0;">Country : </span>{{ user.country }}</span>
+                </div>
+
+                <div class="profile-item">
+                    <i class="icofont-location-pin"></i>
+                    <span><span style="color: #a0a0a0;">Pincode : </span>{{ user.pincode }}</span>
+                </div>
+
+                <div class="profile-item">
+                    <i class="icofont-home"></i>
+                    <span><span style="color: #a0a0a0;">Address : </span>{{ user.address }}</span>
+                </div>
+
+            
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}
+</html>

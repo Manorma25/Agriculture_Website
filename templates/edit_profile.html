@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(238, 192, 68, 0.1) !important;
+        }
+
+        .row {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .col-md-3 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .col-md-3 img {
+
+            border-radius: 50%;
+            border: 3px solid #eec044;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background-color: #eec044;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #eec044;
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .con {
+            max-width: 700px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .con h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4baf47;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .input-group-text i {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .form-control:focus {
+            border-color: #4baf47;
+            box-shadow: none;
+        }
+
+        .form-label {
+            color: #aeaeae;
+        }
+
+        .btn-edit {
+            background-color: #4baf47;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-edit:hover {
+            background-color: #3a9d30;
+            transform: scale(1.05);
+        }
+
+        .btn-cancel {
+            background-color: white;
+            color: #4baf47;
+            border-radius: 5px;
+            padding: 8px 36px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid #4baf47;
+        }
+
+        .btn-cancel:hover {
+            background-color: #3a9d30;
+            transform: scale(1.05);
+        }
+
+        .alert-fixed {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            width: 90%;
+            max-width: 500px;
+        }
+
+
+
+
+        @media (max-width: 768px) {
+            .con {
+                padding: 20px;
+            }
+
+            body {
+                overflow-y: scroll !important;
+            }
+            form{
+            margin-left: -115px;
+            }
+            #display-image{
+                height: 60px;
+                width: 60px;
+            }
+        }
+
+
+        .file-input {
+            display: none;
+        }
+    </style>
+</head>
+
+<body style="overflow-y: hidden;">
+    <form method="POST" enctype="multipart/form-data" action="" >
+        <div class="row ps-5">
+            {% csrf_token %}
+            <div class="col-md-3 i pt-5 ps-5">
+                {% if user.profileimg %}
+                <img src="{{user.profileimg.url}}" height="150px" width="150px" id="display-image">
+                {% else %}
+                <img src="{% static 'images/r3.jpeg' %}" height="150px" width="150px" id="display-image">
+                {% endif %}
+                <h3 style="font-family: 'Lato'">{{ user.name }}</h3>
+                <input type="file" id="file-upload" class="file-input" accept="image/*" name="profile">
+                <a class="btn mt-2" id="upload-button" onclick="document.getElementById('file-upload').click()">Upload
+                    Image</a>
+            </div>
+
+            <div class="col-md-9 con mt-2" data-aos="zoom-in" data-aos-duration="800">
+                <h1 class="mb-3">Edit Profile</h1>
+                <div class="form-group mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="icofont-user"></i>
+                        </span>
+                        <input type="text" id="name" name="name" class="form-control" required value="{{ user.name }}">
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="icofont-envelope"></i>
+                        </span>
+                        <input type="email" id="email" name="email" class="form-control" readonly
+                            value="{{ user.email }}">
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="icofont-calendar"></i>
+                        </span>
+                        <input type="date" id="dob" name="date" class="form-control" value="{{user.dob}}">
+                    </div>
+                </div>
+
+                <div style="display: flex;flex-direction: row;">
+
+                    <div class="form-group mb-3 pe-4">
+                        <label for="gender" class="form-label">Gender</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="icofont-user"></i>
+                            </span>
+                            <input type="text" id="gender" name="gender" class="form-control" value="{{user.gender}}">
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 ">
+                        <label for="phone" class="form-label">Phone</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="icofont-phone"></i>
+                            </span>
+                            <input type="text" id="phone" name="phone" class="form-control" value="{{user.phone}}">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex;flex-direction: row;">
+
+                    <div class="form-group mb-3 pe-4">
+                        <label for="country" class="form-label">Country</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="icofont-globe"></i>
+                            </span>
+                            <input type="text" id="country" name="country" class="form-control"
+                                value="{{user.country}}">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label for="pincode" class="form-label">Pincode</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="icofont-location-pin"></i>
+                            </span>
+                            <input type="text" id="pincode" name="pincode" class="form-control"
+                                value="{{user.pincode}}">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="icofont-home"></i>
+                        </span>
+                        <input type="text" id="address" name="address" class="form-control" value="{{user.address}}">
+                    </div>
+                </div>
+
+                <div class="form-group text-start mt-4">
+                    <button class="btn btn-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-edit ms-2">Save</button>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+    <!--<script>
+        document.getElementById('upload-button').addEventListener('click', function() {
+            document.getElementById('file-upload').click();
+        });
+    </script>-->
+    <script>
+        document.getElementById('file-upload').addEventListener('change', function (event) {
+            var displayImage = document.getElementById('display-image');
+            var file = event.target.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    displayImage.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+{% endblock %}
+
+</html>

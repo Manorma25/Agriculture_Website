@@ -1,0 +1,38 @@
+
+:root {
+    --primary-color: #46AEA2;
+    --secondary-color: #fe6768;
+}
+
+* {
+   
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sub-heading{
+    color:white;
+    font-family: Georgia;
+
+}
+
+
+
+/*Index1*/
+
+
+.index11{
+    font-size: 100px;
+    color:white;
+}
+
+.discover:hover{
+    background-color: black;
+    color: white;
+    transition: 1s;
+}
+
+/*Index2*/
+
+

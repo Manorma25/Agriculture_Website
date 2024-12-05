@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'sidebar.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Prediction Result</title>
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f9ff, #c2e9fb); 
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+           
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2); 
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px); 
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+            color: #4baf47; 
+            font-weight: 600;
+        }
+
+        .result-section {
+            text-align: center;
+        }
+
+        .result-section img {
+            max-width: 60%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); 
+            transition: transform 0.3s ease;
+            height:200px;
+        }
+
+        .result-section img:hover {
+            transform: scale(1.05); 
+        }
+
+        .treatment-info {
+            background-color: #f9f9f9;
+           
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
+           
+            transition: all 0.3s ease;
+        }
+
+        .treatment-info p {
+          
+            font-size: 16px;
+            color: #333;
+        }
+
+        .btn {
+            background-color: #eec044;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #d2a73b;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            color:white; 
+        }
+
+        h3 strong {
+            color: #eec044;
+        }
+
+        .container:hover .treatment-info {
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); 
+        }
+        .td1{
+            background: linear-gradient(to right, rgba(75, 175, 71,0.1), white);
+            text-align: left;
+        }
+        .td2{
+            background: linear-gradient(to left, rgba(75, 175, 71,0.1), white);
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin-left: -70px;
+                width:290px
+            }
+
+            .result-section img {
+                max-width: 100%;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body style="background-color: rgba(238, 192, 68, 0.1);">
+    <div class="container mt-3" style="background: linear-gradient(to left, rgba(75, 175, 71,0.1), white)">
+        <div class="result-section" data-aos="zoom-in" data-aos-duration="1200">
+            <h3>Prediction Result: <strong>{{ label }}</strong></h3>
+            <div class="i">
+            <img src="{{ image_url }}" alt="Uploaded Image" />
+            <div class="magnifier"></div>
+            <!-- <img src=" {% static 'images/plant_back1.jpg' %}" alt="Uploaded Image" /> -->
+             </div>
+
+            <p>The plant is predicted to have: <strong>{{ label }}</strong>.</p>
+
+            <div class="treatment-info">
+                <!-- <table class="table table-bordered">
+                    <thead >
+                        <tr>
+                            <th style="background-color: #4baf47;color:white">Symptoms</th>
+                            <th style="background-color: #4baf47;color:white">Suggested Treatment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Discolored spots on leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Apply appropriate fungicides and remove infected parts.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1"><i class="icofont-leaf"></i>&nbsp;&nbsp;Mold growth on leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Improve air circulation around plants.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1"><i class="icofont-leaf"></i>&nbsp;&nbsp;Wilting leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Ensure proper watering practices.</td>
+                        </tr>
+                    </tbody>
+                </table> -->
+                {% if 'Healthy' in label %}
+                <p>The plant appears to be healthy! Keep monitoring for any changes.</p>
+                {% elif 'Fungal' in label %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #4baf47;color:white">Symptoms</th>
+                            <th style="background-color: #4baf47;color:white">Suggested Treatment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Discolored spots on leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Apply appropriate fungicides and remove infected parts.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Mold growth on leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Improve air circulation around plants.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Wilting leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Ensure proper watering practices.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% elif 'Bacterial' in label %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #4baf47;color:white">Symptoms</th>
+                            <th style="background-color: #4baf47;color:white">Suggested Treatment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Water-soaked spots on leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Use copper-based bactericides.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Leaf wilting</td>
+                            <td class="td2">&nbsp;&nbsp;Prune infected areas immediately.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Bacterial ooze on stems</td>
+                            <td class="td2">&nbsp;&nbsp;Avoid overhead watering.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% elif 'Viral' in label %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #4baf47;color:white">Symptoms</th>
+                            <th style="background-color: #4baf47;color:white">Suggested Treatment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Yellowing of leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Remove and destroy infected plants.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Stunted growth</td>
+                            <td class="td2">&nbsp;&nbsp;Control pests that may spread the virus.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Deformed leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Ensure proper pest control measures.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% elif 'Pest' in label %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #4baf47;color:white">Symptoms</th>
+                            <th style="background-color: #4baf47;color:white">Suggested Treatment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Visible mites on leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Use insecticidal soaps or oils.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Webbing on leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Maintain good plant health to resist pests.</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" ><i class="icofont-leaf" style="color:#919191"></i>&nbsp;&nbsp;Chewed leaves</td>
+                            <td class="td2">&nbsp;&nbsp;Regularly inspect plants for early signs of infestation.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% else %}
+                <p>The plant condition is unknown. Please consult with an expert or provide a clearer image.</p>
+                {% endif %}
+            </div>
+
+            <a href="{% url 'plant' %}" class="btn">Upload another image</a>
+        </div>
+    </div>
+
+
+   
+</body>
+
+{% endblock %}
+</html>

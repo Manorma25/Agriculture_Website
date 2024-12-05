@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <title>Sidebar</title>
+    <style>
+        /* Reset and Basic Styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cr-white: #ffffff;
+            --cr-green: #4baf47;
+            --cr-yellow: #eec044;
+            --cr-dark: #333333;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .page {
+            color: var(--cr-dark);
+            background: var(--cr-white);
+            display: grid;
+            grid-template-columns: 4.125rem auto;
+            grid-template-areas: "nav main";
+            min-height: 100vh;
+            font-size: 1.025rem;
+            font-family: sans-serif;
+            transition: grid-template-columns 0.3s ease-in-out;
+        }
+
+        .page__nav {
+            grid-area: nav;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            transition: width 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .page__main {
+            grid-area: main;
+            padding: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav {
+            color: var(--cr-dark);
+            background: var(--cr-green);
+            position: relative;
+            width: 4.125rem;
+            overflow: hidden;
+            box-shadow: 0.3em 0 0.3em rgba(0, 0, 0, 0.15);
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav:hover {
+            width: 13em;
+        }
+
+        .nav__logo {
+            margin-bottom: 2em;
+        }
+
+        .nav__list {
+            font-size: 0.95rem;
+            list-style: none;
+            padding-left: 0px;
+        }
+
+        .nav__list_bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .nav__item:hover {
+            background: rgba(195, 205, 195, 0.2) !important;
+        }
+
+        .nav__link {
+            color: var(--cr-white);
+            display: flex;
+            align-items: center;
+            padding-block: 0.8em;
+            text-decoration: none;
+            transition: background 200ms ease-in-out;
+        }
+
+        .nav__link-img-box {
+            padding-left: 12px;
+            width: 3em;
+        }
+
+        .nav__link-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .nav__link-icon {
+            padding-left: 16px;
+            font-size: 1.6rem;
+        }
+
+        .nav__link-txt-logo {
+            position: absolute;
+            width: max-content;
+            font-size: 25px;
+            color: black;
+            padding-left: 60px;
+            font-weight: 700 !important;
+        }
+
+        .nav__link-txt {
+            position: absolute;
+            left: 4.125rem;
+            width: max-content;
+            color: var(--cr-white);
+        }
+
+        .nav__link-logo {
+            color: black;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: background 200ms ease-in-out;
+        }
+        .dropdown.show~.soil {
+            margin-top: 110px;
+            transition: margin-top 0.3s ease-in-out;
+        }
+        .dropdown.show~.plant1 {
+            margin-top: 80px;
+            transition: margin-top 0.3s ease-in-out;
+        }
+
+        .dropdown-menu {
+            max-height: 0;
+            transition: max-height 0.3s ease-in-out;
+            display: none;
+            padding-left: 2em;
+            margin-left: 35px !important ;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .dropdown-item {
+            color: white !important;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(75, 175, 71, 0.2) !important;
+            color: white !important;
+        }
+
+        .dropdown.show .dropdown-menu {
+            display: block;
+            margin-top: 0.5em;
+            /* max-height: 10em; */
+        }
+      
+
+        .page__main {
+            transition: transform 0.3s ease-in-out;
+        }
+
+@media (max-width: 768px) {
+    .page__nav {
+        display: none; /* Hide sidebar */
+        width: 15em; /* Set width when visible */
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: var(--cr-green);
+        box-shadow: 0.3em 0 0.3em rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .page__nav.active {
+        display: block; 
+        transform: translateX(0); /* Reset transform when visible */
+    }
+
+    .menu-btn {
+        display: block; /* Show menu button on small screens */
+        position: fixed;
+        background: var(--cr-green);
+        border: none;
+        color: var(--cr-white);
+        font-size: 2rem;
+        padding: 0.2em;
+        cursor: pointer;
+        z-index: 1200; /* Ensure button is on top */
+    }  
+}
+
+    </style>
+
+<script type="text/javascript">
+    (function() {
+        // Function to prevent back navigation
+        var preventBack = function() {
+            window.history.forward();
+        };
+
+        // Modify the browser history state when the page loads
+        window.onload = function() {
+            preventBack(); // Prevent backward navigation on page load
+
+            // Push a state to override the current page in history, so back won't work
+            window.history.pushState(null, null, window.location.href);
+        };
+
+        // Re-apply history push on page show if page was cached
+        window.onpageshow = function(evt) {
+            if (evt.persisted) {
+                window.history.pushState(null, null, window.location.href);
+            }
+        };
+
+        // Ensure the page can't be unloaded via back navigation
+        window.onunload = function() {};
+    })();
+</script>
+
+</head>
+
+<body class="page">
+    <button class="menu-btn" >
+        <i class="icofont-navigation-menu"></i> 
+    </button>
+  <nav class="page__nav">
+      <h1 class="nav__logo" style="background-color: white; font-weight: 500;">
+          <a class="nav__link-logo p-3 ps-2 pe-2" href="#" style="font-weight: 500;">
+              <img src="{% static 'images/file.png' %}" height="40px" width="50px" alt="AgroTech Logo">
+              <span class="nav__link-txt-logo" style="font-weight: 500;">AgroTech</span>
+          </a>
+      </h1>
+      <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="{% url 'dash'%}"><i class="icofont-home nav__link-icon"></i><span class="nav__link-txt">Dashboard</span></a></li>
+          
+          <li class="nav__item dropdown">
+              <a class="nav__link dropdown-toggle" href="#" id="accountDropdown" role="button">
+                  <i class="icofont-user nav__link-icon"></i>
+                  <span class="nav__link-txt">My Account</span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                  <li><a class="dropdown-item" href="{% url 'User Profile' %}">My Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'Edit Profile' %}">Edit Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'Change Password' %}">Change Password</a></li>
+              </ul>
+          </li>
+         
+          
+          <!-- <li class="nav__item plant"><a class="nav__link" href="{% url 'plant' %}"><i class="icofont-tree nav__link-icon"></i><span class="nav__link-txt">Predictions</span></a></li> -->
+          <li class="nav__item soil"><a class="nav__link" href="{% url 'State' %}"><i class="icofont-leaf nav__link-icon"></i><span class="nav__link-txt">Crops</span></a></li>
+          <li class="nav__item"><a class="nav__link" href="{% url 'fertilizers' %}"><i class="icofont-chart-line nav__link-icon"></i><span class="nav__link-txt">Fertilizers</span></a></li>
+          <li class="nav__item"><a class="nav__link" href="{% url 'Crop2' %}"><i class="icofont-question-circle nav__link-icon"></i><span class="nav__link-txt">Crop Yields</span></a></li>
+          <li class="nav__item"><a class="nav__link" href="{% url 'pred' %}"><i class="icofont-comment nav__link-icon"></i><span class="nav__link-txt">Analysis</span></a></li>
+
+          <li class="nav__item dropdown ">
+            <a class="nav__link dropdown-toggle" href="#" id="plantDropdown" role="button">
+                <i class="icofont-tree nav__link-icon"></i>
+                <span class="nav__link-txt">Plant Diseases</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="plantDropdown">
+                <li><a class="dropdown-item" href="{% url 'plant' %}">Prediction</a></li>
+                <li><a class="dropdown-item" href="{% url 'plant_eda' %}">EDA</a></li>
+            </ul>
+        </li>
+
+          <ul class="nav__list nav__list_bottom">
+            <li class="nav__item"><a class="nav__link" href="#">
+                <div class="nav__link-img-box">
+                    {% if user.profileimg %}
+                    <img src="{{ user.profileimg.url }}" height="40" width="40" style="border-radius: 50%;border: 2px solid white;">
+                    <!-- 
+                    <img src="{% static 'images/without_dp.jpg' %}" height="40" width="40" alt="Profile Image"
+                    style="border-radius: 50%;border: 2px solid white;"> -->
+                    {% endif %}
+                </div>
+                <span class="nav__link-txt">{{user.name}}</span>
+                <!-- <span class="nav__link-txt">Helllo</span> -->
+            </a></li>
+            <li class="nav__item">
+                <a class="nav__link" href="{%url 'Logout' %}">
+                    <i class="icofont-sign-out nav__link-icon"></i>
+                    <span class="nav__link-txt">Logout</span>
+                </a>
+            </li>
+
+            
+          </ul>
+      </ul>
+  </nav>
+
+  <div class="page__main">
+      {% block content %}
+      <div style="background-color: blue;height: 300px;width: 500px;"></div>
+      {% endblock %}
+      <div>
+        {% include 'chatbot.html' %}
+    </div>
+  </div>
+  
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const nav = document.querySelector('.page__nav');
+          const main = document.querySelector('.page__main');
+          const navWidthExpanded = '6em'; // Width of sidebar when expanded
+          const navWidthCollapsed = '0.125rem'; // Width of sidebar when collapsed
+        
+          nav.addEventListener('mouseenter', function() {
+              main.style.transform = `translateX(${navWidthExpanded})`;
+          });
+
+          nav.addEventListener('mouseleave', function() {
+              main.style.transform = `translateX(${navWidthCollapsed})`;
+          });
+
+          
+          document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+              toggle.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  let parent = toggle.closest('.dropdown');
+                  let dropdownMenu = parent.querySelector('.dropdown-menu');
+
+                  if (parent.classList.contains('show')) {
+                      dropdownMenu.style.maxHeight = 0; /* Collapse */
+                      setTimeout(() => {
+                          parent.classList.remove('show');
+                      }, 300); /* Match the transition duration */
+                  } else {
+                      parent.classList.add('show');
+                      dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + "px"; /* Expand */
+                  }
+              });
+          });
+
+          // Auto-hide dropdown when hovering away
+          document.querySelector('.page__nav').addEventListener('mouseleave', function() {
+              document.querySelectorAll('.dropdown.show').forEach(function(openDropdown) {
+                  let dropdownMenu = openDropdown.querySelector('.dropdown-menu');
+                  dropdownMenu.style.maxHeight = 0;
+                  setTimeout(() => {
+                      openDropdown.classList.remove('show');
+                  }, 100); 
+              });
+          });
+      });
+
+      document.querySelector('.menu-btn').addEventListener('click', function () {
+            document.querySelector('.page__nav').classList.toggle('active');
+        });
+  </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    AOS.init();
+  </script>
+</body>
+</html>

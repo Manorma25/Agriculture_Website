@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="base.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+   
+    <script src="{%static 'js/bootstrap.bundle.min.js' %}"></script>
+
+        <style>
+            .log-main{
+            font-family: sans-serif;
+        }
+            
+            .form-control:focus{
+                
+              border: 1px solid #4baf47;
+              box-shadow: none !important;
+             
+            }
+            ::placeholder {
+        font-size: 0.8em;
+    }
+
+    .s{
+            color:white;background-color: #4baf47;border-radius: 20px;
+        }
+
+        .s:hover{
+            transition: 0.5s;
+            transform: scale(1.04);
+            background-color: #eec044;
+            color: white;
+            
+        }
+
+        @media (max-width: 768px) {
+            .image-col {
+                display: none;
+            }
+            .main, .g{
+                padding: 0px !important;
+            }
+
+           
+        }
+
+        </style>
+</head>
+
+<body>
+   
+    
+
+   
+
+   
+    <!---->
+
+
+    <div class="container log-main pt-4 ">
+        <div class="pt-5 pb-5 ">
+            {% if msg %}
+            <div class="alert alert-success" role="alert" style="margin-top: -72px;">
+                {{msg}}
+            </div>
+        
+            {% endif %}
+
+            {% if err %}
+            <div class="alert alert-danger" role="alert" style="margin-top: -72px;">
+                {{err}}
+            </div>
+            {% endif %}
+        
+                <div class="row  pe-5 pb-3 pt-4 ps-3 main" style="background-color: #e8f6e9;">
+                      
+                    <div class="col-md-5 p-4 pb-1"
+                        style="background-color: white;border-radius: 20px;border: 2px solid #4baf47;">
+                        <p class="fs-1" style="font-family: sans-serif;font-weight: bold;">Sign up</p>
+                        <h6 class="pb-4" style="margin-top: -20px;">Stay updated with AgroTech</h6>
+
+                        <form id="myform" method="POST" action="{%url 'Check' %}">
+                            {% csrf_token %}
+
+                        <div class="input-group" style="border:1px solid #ccc ;border-radius: 8px;">
+                            <span class="input-group-text"><img src="{%static 'images/user.png' %}"></i></span>
+                            <input type="text" name="r_name" class="form-control form-control"
+                                placeholder="Full Name" required autocomplete="off" value="{{name}}">
+                        </div>
+
+                        <div class="input-group mt-3" style="border:1px solid #ccc ;border-radius: 8px;">
+                            <span class="input-group-text"><img src="{%static 'images/email (2).png' %}"></i></span>
+                            <input type="email" name="r_email" class="form-control form-control"
+                                placeholder="Email" required autocomplete="off" value="{{email}}">
+                        </div>
+
+                        <div class="input-group mt-3" style="border:1px solid #ccc ;border-radius: 8px;">
+                            <span class="input-group-text"><img src="{%static 'images/padlock (1).png' %}"></i></span>
+                            <input type="password" name="r_password" class="form-control form-control"
+                                placeholder="Password" required autocomplete="off" value="{{password}}">
+                        </div>
+
+                        <div class="input-group mt-3" style="border:1px solid #ccc ;border-radius: 8px;" hidden>
+                            <span class="input-group-text"><img src="{%static 'images/padlock (1).png' %}"></i></span>
+                            <input type="text" name="org_otp" class="form-control form-control"
+                                placeholder="orig_otp" required autocomplete="off" value="{{org_otp}}">
+                        </div>
+
+                        <div class="input-group mt-3" style="border:1px solid #ccc ;border-radius: 8px;">
+                            <span class="input-group-text"><img src="{%static 'images/padlock (1).png' %}"></i></span>
+                            <input type="text" name="enter_otp" class="form-control form-control"
+                                placeholder="Enter your otp" required autocomplete="off"  >
+                        </div>
+  
+                        <a>
+                        <div class="pt-4" style="display: flex;justify-content: center;">
+                            <button class="btn pe-5 ps-5 fs-5 s shadow" type="submit">
+                                Sign up
+                            </button>
+                        </div>
+                        </a>
+
+                        <p class="fs-6" style="text-align: center;color: #888888;font-weight: 500;">or</p>
+
+                        
+
+                    </form>
+
+                        <p class="pt-2 " style="text-align: center;font-weight: 500;color: #888888;border-top:1px solid #a5a5a5 ;">Already registered? 
+                            <a href="{%url 'Signin' %}" style="text-decoration: none;"><span style="color: #4baf47;">Sign in</span></p></a>
+                    </div>
+
+                    <div class="col-md-7 ps-5 image-col">
+                        <img src="{%static 'images/Untitled_Project__2_-removebg-preview.png' %}" class="img-fluid" height="500px" width="620px">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!---->
+
+   
+    
+   
+
+</body>
+
+</html>
+

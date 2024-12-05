@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+{% block content %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/index.css' %}">
+
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+
+
+    <script src="{%static 'typed.js@2.0..js' %}"></script>
+
+    <title>Index</title>
+
+    <style>
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .discover {
+            animation: pulse 2s infinite;
+        }
+
+        .discover:hover {
+            color: #eec044 !important;
+        }
+
+        /*For timer modal*/
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .close {
+            background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;}
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .reminder-div {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, rgba(75, 175, 71), rgb(238, 192, 68)); 
+            /* background-color: #26a921; */
+            /* background-color: #e9b424; */
+        
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+            /* White text */
+            padding: 25px 15px;
+            border-radius: 15px;
+            width: 500px;
+            text-align: center;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            font-size: 20px;
+            z-index: 1000;
+        }
+        .reminder-div a{
+            color:black;
+        }
+        
+        .reminder-div p .btn{
+           background-color: white;
+           font-size: 20px; 
+        }
+        .no-scroll {
+    overflow: hidden;
+}
+
+    </style>
+</head>
+
+<body>
+    <!--Timer-->
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class=" reminder-div">
+            <!-- <span class="close">&times;</span> -->
+            <img src="{%static 'images/w.png' %}" height="200px" width="200px">
+            <h3>Welcome to our platform! </h3>
+            <p>Signup or login to access exclusive content, latest recommendations, and much more.</p>
+            <p class="pt-4"><a href="{% url 'Signin' %}"><button class="btn ps-4 pe-4" style="border-radius: 40px;">Login</button></a> | <a href="{% url 'Signup' %}"><button class="btn ps-4 pe-4 " style="border-radius: 40px;">Signup</button></a></p>
+            <button class="close" style="font-family: Arial">X</button>
+
+
+        </div>
+    </div>
+    </div>
+
+   
+       <script type="text/javascript">
+    window.onload = function () {
+        var modal = document.getElementById("myModal");
+        var closeBtn = document.getElementsByClassName("close")[0];
+
+        setTimeout(function () {
+            modal.style.display = "block";
+            document.body.classList.add("no-scroll");
+        }, 6000); // 6000 milliseconds = 6 seconds
+
+        // Close the modal when the user clicks on the close button
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+            document.body.classList.remove("no-scroll");
+        }
+
+        // Close the modal when the user clicks anywhere outside of the modal
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.classList.remove("no-scroll");
+            }
+        }
+    };
+</script>
+
+
+
+    <!-- index1 -->
+
+    <section>
+        <div class="index1 " style="background-image: url({%static 'images/back2.jpg' %}); overflow-x: hidden;">
+            <div style="width:100%;background-color:rgba(0, 0, 0,0.6); ">
+                <div class="row pb-5">
+                    <div class="col-md-1 "> </div>
+
+                    <div class="col-md-5 pt-5 ps-5 pb-5">
+                        <p class="fs-6" style="color: white;font-family: Georgia;font-weight: bold;">WELCOME TO <span
+                                class="typing-text fs-4 ps-2 " style="color:#eec044"></span></p>
+                        <p style="color:white;font-size: 120px;line-height: 120px;font-weight: 400;">Agriculture <br>
+                            <span style="color:#eec044">&</span> Eco <br>Farming<img
+                                src="{%static 'images/leaf-01.webp' %}" style="padding-top: 10px;">
+                        <p>
+                        <p class="pt-3" style="color:#c2c1c1;font-weight:600;font-family: 'Times New Roman';">Your
+                            trusted resource for modern farming practices and sustainable agriculture. Explore our
+                            articles, guides, and expert tips to enhance your farming techniques and boost productivity.
+                            Together, let's cultivate a greener future!</p>
+                        <a href="{%url 'About' %}" target="_blank">
+                            <button class="btn p-3 ps-5 pe-5 discover"
+                                style="background-color:#4baf47;color:white;font-family: 'Times New Roman';font-weight: bold;">Discover
+                                More</button>
+                        </a>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column align-items-end justify-content-center pe-5">
+                        <img src="{%static 'images/instagram.png' %}" width="25px" height="25px">
+                        <br>
+                        <br>
+                        <img src="{%static 'images/facebook.png' %}" width="25px" height="25px">
+                        <br>
+                        <br>
+                        <img src="{%static 'images/linkedin.png' %}" width="25px" height="25px">
+                        <br>
+                        <br>
+                        <img src="{%static 'images/twitter.png' %}" width="25px" height="25px">
+                    </div>
+
+                    <div class="row mb-5"></div>
+                    <div class="row mb-5"></div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // <!-- typed js effect starts -->
+        var typed = new Typed(".typing-text", {
+            strings: ["AgroTech"],
+            loop: true,
+            typeSpeed: 150,
+            backSpeed: 100,
+            backDelay: 500,
+        });
+        // <!-- typed js effect ends -->
+    </script>
+
+    <!-- Index2 -->
+
+    <section>
+
+        <div class="index2" style="overflow-x: hidden;margin-top: -170px;">
+            <div class="row pt-5 ">
+                <div class="col-md-1"></div>
+                <div class="col-md-10 p-5">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="card p-4 pt-4 pb-4">
+                                <p class="fs-4"
+                                    style="color:#eec044;font-family: 'Times New Roman';font-weight:bolder;">Feature 1
+                                </p>
+                                <p class="fs-4" style="font-family: 'Times New Roman';font-weight: bold;">We are using a
+                                    new technology</p>
+                                <div class="ps-5 pe-5">
+                                    <div class="ps-5 pe-5" style="text-align: center;border-radius: 10px;">
+                                        <img class="p-2" src="{%static 'images/tractor.png' %}" width="60px"
+                                            height="60px" style="background-color: #4baf47;border-radius: 10px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4 ">
+                            <div class="card p-4 pt-4 pb-4">
+                                <p class="fs-4"
+                                    style="color:#eec044;font-family: 'Times New Roman';font-weight:bolder;">Feature 1
+                                </p>
+                                <p class="fs-4" style="font-family: 'Times New Roman';font-weight: bold;">We are using a
+                                    new technology</p>
+                                <div class="ps-5 pe-5">
+                                    <div class="ps-5 pe-5" style="text-align: center;border-radius: 10px;">
+                                        <img class="p-2" src="{%static 'images/plant.png' %}" width="60px" height="60px"
+                                            style="background-color: #4baf47;border-radius: 10px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 ">
+                            <div class="card p-4 pt-4 pb-4">
+                                <p class="fs-4"
+                                    style="color:#eec044;font-family: 'Times New Roman';font-weight:bolder;">Feature 1
+                                </p>
+                                <p class="fs-4" style="font-family: 'Times New Roman';font-weight: bold;">We are using a
+                                    new technology</p>
+                                <div class="ps-5 pe-5">
+                                    <div class="ps-5 pe-5" style="text-align: center;border-radius: 10px;">
+                                        <img class="p-2" src="{%static 'images/tractor.png' %}" width="60px"
+                                            height="60px" style="background-color: #4baf47;border-radius: 10px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Index3 -->
+    <section style="background-image: url({%static 'images/index7.png' %});background-size: cover;">
+        <div class="index3 pb-5" style="overflow-x:hidden ;">
+            <div class="row pt-3 pb-5">
+                <div class="col-md-6 pt-5 ps-5 ">
+                    <img src="{%static 'images/Untitled_Project__2_-removebg-preview.png' %}" height="600px"
+                        width="670px" class="moving-image">
+                </div>
+
+                <div class="col-md-5 pe-5 pt-4 ps-4">
+                    <p class="fs-2" style="color:#eec044;font-family:Algerian;font-weight: 500;">Our Introduction</p>
+
+                    <p style="font-size: 50px;font-weight: bold;" class="pe-5">Agriculture & Organic Product Farm</p>
+                    <p class="fs-3" style="color:#4baf47;font-weight: 500;">Agrios is the largest global organic farm.
+                    </p>
+                    <p style="color:#898888" class="fs-6 pe-5">There are many variations of passages of lorem ipsum
+                        available but the majority have suffered alteration in some form by injected humor or random
+                        word which don’t look even.</p>
+
+                    <div class="row pt-4 pb-4">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3 ">
+                                    <img class="rotate" src="{%static 'images/fruits-and-vegetables.png' %}">
+                                </div>
+
+                                <div class="col-md-9">
+                                    <p class="fs-5" style="font-weight: 500;">Tips For healthy growth</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-3 ">
+                                    <img class="rotate" src="{%static 'images/plant (1).png' %}" height="64px"
+                                        width="64px">
+                                </div>
+
+                                <div class="col-md-9">
+                                    <p class="fs-5" style="font-weight: 500;">Tips For healthy growth</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="line-height: 30px; font-weight: 400;color:#4b4a4a" class="pb-3"><img
+                            src="{%static 'images/checked (1).png' %}" width="16px" height="16px">&nbsp;&nbsp;Lorem
+                        ipsum dolor sit
+                        amet consectetur
+                        <br>
+                        <img src="{%static 'images/checked (1).png' %}" width="16px" height="16px">&nbsp;&nbsp;Lorem
+                        ipsum dolor sit
+                        amet consectetur
+                    </p>
+
+                    <a href="{%url 'About' %}" target="_blank">
+                        <button class="btn p-3 ps-5 pe-5 discover"
+                            style="background-color:#4baf47;color:white;font-family:'Times New Roman';font-weight: bold;font-size: 18px;">Discover
+                            More</button>
+                    </a>
+                </div>
+
+                <div class="col-md-1"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Index4 -->
+
+    <section style="background-image: url({%static 'images/back_fruits2.jpg' %});background-size: cover;">
+        <div class="container " style="padding-bottom: 0;">
+            <div class="row p-5 " style="padding-bottom: 0;">
+                <div class="col-md-12" style="padding-bottom: 0;">
+                    <p class="fs-3"
+                        style="text-align: center;color:#eec044;font-family:Algerian;font-weight: 500;margin-bottom:0">
+                        Our Services</p>
+                    <p style="font-size: 50px;text-align: center ;font-weight: 700;margin-top:-10px;">What we Offer </p>
+
+                    <div class="row p-5 ps-3 pt-1" style="padding-bottom: 0;">
+                        <div class="col-md-3 p-5 service" style="padding-bottom: 0;">
+                            <div class="s" style="background-image: url({%static 'images/service1.webp' %});"></div>
+
+                            <div class="p-3 ms-4 pe-3 ps-3"
+                                style="background-color: white;text-align: center;width: 202px;margin-top: -60px;border-radius: 10px;box-shadow: 0px 4px 8px #ccc;">
+                                <img class="p-2 c" src="{%static 'images/tractor (1).png' %}" height="64px" width="64px"
+                                    style="margin-top: -50px;border-radius: 10px;">
+
+                                <p class="fs-4" style="font-weight: 500;"> Agriculture <br>Products</p>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="col-md-3 p-5 service" style="padding-bottom: 0;">
+                            <div class="s" style="background-image: url({%static 'images/fruits.webp' %});"></div>
+
+                            <div class="p-3 ms-4 pe-3 ps-3"
+                                style="background-color: white;text-align: center;width: 202px;margin-top: -60px;border-radius: 10px;box-shadow: 0px 4px 8px #ccc;">
+                                <img class="p-2 c" src="{%static 'images/gardening.png' %}" height="64px" width="64px"
+                                    style="margin-top: -50px;border-radius: 10px;">
+
+                                <p class="fs-4" style="font-weight: 500;"> Agriculture <br>Products</p>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-3 p-5 service" style="padding-bottom: 0;">
+                            <div class="s" style="background-image: url({%static 'images/garden.jpg' %});"></div>
+
+                            <div class="p-3 ms-4 pe-3 ps-3"
+                                style="background-color: white;text-align: center;width: 202px;margin-top: -60px;border-radius: 10px;box-shadow: 0px 4px 8px #ccc;">
+                                <img class="p-2 c" src="{%static 'images/tractor (1).png' %}" height="64px" width="64px"
+                                    style="margin-top: -50px;border-radius: 10px;">
+
+                                <p class="fs-4" style="font-weight: 500;"> Agriculture <br>Products</p>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-3 p-5 service" style="padding-bottom: 0;">
+                            <div class="s" style="background-image: url({%static 'images/vegetables.jpg' %});"></div>
+
+                            <div class="p-3 ms-4 pe-3 ps-3"
+                                style="background-color: white;text-align: center;width: 202px;margin-top: -60px;border-radius: 10px;box-shadow: 0px 4px 8px #ccc;">
+                                <img class="p-2 c" src="{%static 'images/gardening.pn' %}g" height="64px" width="64px"
+                                    style="margin-top: -50px;border-radius: 10px;">
+
+                                <p class="fs-4" style="font-weight: 500;"> Agriculture <br>Products</p>
+                            </div>
+
+
+
+                        </div>
+
+                        <div style="display: flex;justify-content: center;">
+                            <a href="{%url 'About' %}" target="_blank">
+                                <button class="btn p-3 ps-5 pe-5 discover"
+                                    style="background-color:#4baf47;color:white;font-family: 'Times New Roman';font-weight: bold;">Discover
+                                    More</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- index5 -->
+
+    <section style="background-color: #e8f6e9;">
+        <div class="container pb-5">
+            <div class="pt-5 pb-5">
+                <p class="fs-5" style="text-align: center;color: #4baf47;letter-spacing: 2px;font-weight: 500;">WHAT WE
+                    DO</p>
+                <p class="fs-1 pb-3" style="text-align: center;font-weight: 500;line-height: 50px;">What You Can Do <br>
+                    with
+                    AgroTech</p>
+
+                <div class="row ps-5 pe-5 pt-5 ">
+
+                    <div class="col-md-6 pe-4">
+
+                        <div class="do">
+
+                            <div class="row p-3 ps-1">
+                                <div class="col-md-3 pt-5 ps-5">
+                                    <img class=" p-2" src="{%static 'images/shovels (2).png' %}"
+                                        style="background-color: #4baf47;border-radius: 4px;">
+                                </div>
+                                <div class="col-md-9 pt-4">
+                                    <p class="fs-4" style="font-weight: 500;">Landscaping</p>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                        tempor invidunt ut labore et dolore magna aliquyam erat,</p>
+
+                                    <p style="color:#4baf47;font-weight: 500;">Read More <img
+                                            src="{%static 'images/right-arrow.png' %}"></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6 pe-4">
+
+                        <div class="do">
+
+                            <div class="row p-3 ps-1">
+                                <div class="col-md-3 pt-5 ps-5">
+                                    <img class=" p-2" src="{%static 'images/gardening-tools.png'%}"
+                                        style="background-color: #4baf47;border-radius: 4px;">
+                                </div>
+                                <div class="col-md-9 pt-4">
+                                    <p class="fs-4" style="font-weight: 500;">Garden Maintenance</p>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                        tempor invidunt ut labore et dolore magna aliquyam erat,</p>
+
+                                    <p style="color:#4baf47;font-weight: 500;">Read More <img
+                                            src="{%static 'images/right-arrow.png' %}"></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row ps-5 pe-5 pt-5">
+
+                    <div class="col-md-6 pe-4">
+
+                        <div class="do">
+
+                            <div class="row p-3 ps-1">
+                                <div class="col-md-3 pt-5 ps-5">
+                                    <img class=" p-2" src="{%static 'images/pruning-shears.png' %}"
+                                        style="background-color: #4baf47;border-radius: 4px;">
+                                </div>
+                                <div class="col-md-9 pt-4">
+                                    <p class="fs-4" style="font-weight: 500;">Pruning Plants</p>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                        tempor invidunt ut labore et dolore magna aliquyam erat,</p>
+
+                                    <p style="color:#4baf47;font-weight: 500;">Read More <img
+                                            src="{%static 'images/right-arrow.png' %}"></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-6 pe-4">
+
+                        <div class="do">
+
+                            <div class="row p-3 ps-1">
+                                <div class="col-md-3 pt-5 ps-5">
+                                    <img class=" p-2" src="{%static 'images/gardening.png' %}"
+                                        style="background-color: #4baf47;border-radius: 4px;">
+                                </div>
+                                <div class="col-md-9 pt-4">
+                                    <p class="fs-4" style="font-weight: 500;">Irrigation & Drainage</p>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                        tempor invidunt ut labore et dolore magna aliquyam erat,</p>
+
+                                    <p style="color:#4baf47;font-weight: 500;">Read More <img
+                                            src="{%static 'images/right-arrow.png' %}"></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- index6 -->
+
+    <section style="background-image: url({%static 'images/index7.png' %});background-size: cover;">
+
+        <div class="index6 ">
+            <marquee behavior="scroll" scrollamount="10">
+                <p class="outlined-text"><span class="ps-3 pe-3">Agriculture </span><img
+                        src="{%static 'images/flower (1).png' %}"><span class="ps-3 pe-3">Farming </span><img
+                        src="{%static 'images/flower (1).png' %}"><span class="ps-3 pe-3">Organic</span><img
+                        src="{%static 'images/flower (1).png' %}"><span class="ps-3 pe-3">Products</span><img
+                        src="{%static 'images/flower (1).png' %}">
+                    <span class="ps-3 pe-3">Agriculture </span><img src="{%static 'images/flower (1).png' %}"><span
+                        class="ps-3 pe-3">Farming </span><img src="{%static 'images/flower (1).png' %}"><span
+                        class="ps-3 pe-3">Organic</span><img src="{%static 'images/flower (1).png' %}"><span
+                        class="ps-3 pe-3">Products</span><img src="{%static 'images/flower (1).png' %}">
+                </p>
+            </marquee>
+
+        </div>
+
+        <div class="container pb-5">
+            <div class="pb-5">
+                <div class="row p-5" style="border-top: 1px solid #eec044;border-bottom:1px solid #eec044;">
+                    <div class="col-md-3 ps-5 pt-3 ">
+                        <p class="fs-5" style="color: #898888;line-height: 8px;"><img
+                                src="i{%static 'mages/location-pin.png' %}" class="pe-2">LOCATION</p>
+                        <p class="fs-4 " style="letter-spacing: -2px;font-weight: 400;">Majitha Road, Gopal Nagar <br>
+                            Amritsar, 143001</p>
+
+                    </div>
+                    <div class="col-md-3 ps-5 pt-3">
+                        <p class="fs-5" style="color: #898888;line-height: 8px;"><img
+                                src="{%static 'images/email (2).png' %}" class="pe-2">EMAIL US</p>
+                        <p class="fs-4 co" style="letter-spacing: -2px;font-weight: 400;">agrotech@gmail.com<br>
+                            techagro@gmail.com</p>
+
+                    </div>
+                    <div class="col-md-3 ps-5 pt-3 pe-1">
+                        <p class="fs-5" style="color: #898888;line-height: 8px;"><img
+                                src="{%static 'images/telephone-call.png' %}" class="pe-2">PHONE</p>
+                        <p class="fs-4 co" style="letter-spacing: -2px;font-weight: 400;">798 631 4223<br> 798 631 4223
+                        </p>
+                    </div>
+                    <div class="col-md-3 pt-5">
+                        <a href="{%url 'Contact Us' %}" target="_blank"><button
+                                class="btn ps-5 pe-5 pt-3 pb-3 contact">Contact US</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--index7-->
+
+    <section class="pt-2 pb-5 bg-light">
+        <div class="container faq-section mt-5 p-4" style="border-radius: 100px;">
+            <div class="row">
+                <div class="col-md-6 faq-image">
+                    <div class="pe-5 pt-5 pb-5">
+                        <img src="{%static 'images/garden.jpg' %}" alt="Harvesting" class="img-fluid rounded">
+                    </div>
+                </div>
+                <div class="col-md-6 faq-content d-flex flex-column justify-content-center">
+                    <h1 class="text-success" style="font-family: Georgia">AgroTech FAQ's</h1>
+                    <h4 class="font-weight-medium">Frequently Asked Questions</h4>
+                    <p class="fs-6 pt-3 text-secondary">
+                        If you are new to AgroTech and looking to replatform, this guide will help you learn more about
+                        the platform and its features.
+                    </p>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="card mb-3" style="border-bottom: 1px solid #eec044;">
+                            <div class="card-header p-0" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <img src="{%static 'images/right-arrow (1).png' %}"> &nbsp;&nbsp;How can data
+                                        analytics improve crop yields?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#faqAccordion">
+                                <div class="card-body">
+                                    Data analytics can improve crop yields by analyzing various factors such as soil
+                                    quality, weather patterns, and crop health. By interpreting this data, farmers can
+                                    make informed decisions about planting, irrigation, and harvesting, leading to
+                                    better yields and more efficient resource use.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3" style="border-bottom: 1px solid #eec044;">
+                            <div class="card-header bg-transparent p-0" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <img src="{%static 'images/right-arrow (1).png' %}"> &nbsp;&nbsp;What role do
+                                        weather forecasts play in agriculture?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#faqAccordion">
+                                <div class="card-body">
+                                    Weather forecasts are crucial for agriculture as they help farmers plan activities
+                                    such as planting, irrigation, and harvesting. Accurate weather predictions can
+                                    prevent crop damage from extreme weather events and optimize the use of water and
+                                    other resources.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3" style="border-bottom: 1px solid #eec044;">
+                            <div class="card-header bg-transparent p-0" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        <img src="{%static 'images/right-arrow (1).png' %}"> &nbsp;&nbsp;How can
+                                        satellite imagery be used in agriculture?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#faqAccordion">
+                                <div class="card-body">
+                                    Satellite imagery can be used to monitor crop health, assess field conditions, and
+                                    detect issues such as pest infestations or water stress. This remote sensing
+                                    technology provides large-scale, real-time data that aids in efficient farm
+                                    management and decision-making.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="border-bottom: 1px solid #eec044;">
+                            <div class="card-header bg-transparent p-0" id="headingFour">
+                                <h5 class="mb-0">
+                                    <button class="btn collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                        <img src="{%static 'images/right-arrow (1).png' %}"> &nbsp;&nbsp;What is the
+                                        significance of organic farming in modern agriculture?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                                data-bs-parent="#faqAccordion">
+                                <div class="card-body">
+                                    Organic farming avoids synthetic chemicals and focuses on natural processes and
+                                    biodiversity to produce food. It promotes soil health, reduces pollution, and
+                                    supports sustainable practices. Organic products often have a higher market value
+                                    and appeal to environmentally conscious consumers.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!--Review-->
+
+    <section class="pt-3 pb-5" style="background-image: url({%static 'images/rev.jpg' %});background-size: cover;">
+        <div class="container p-5">
+            <p class="fs-3 pb-3"
+                style="text-align: center;color:#eec044;font-family:Algerian;font-weight: 500;margin-bottom:0"> Reviews
+            </p>
+            <h2 class="text-center mb-5 fs-1">What Others Are Saying...</h2>
+            <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="review-box" style="background-color: rgba(75, 175, 71,0.1);">
+                            <p class="quote">"The machine learning tools on this platform are incredibly intuitive. My
+                                crop yields have increased by 20% thanks to the AI-based recommendations."</p>
+                            <div class="reviewer">
+                                <img src="{%static 'images/r1.avif' %}" alt="Reviewer 1" class="rounded-circle"
+                                    style="border: 3px solid #eec044;">
+                                <h5 style="color:#4baf47">Sunita Patel</h5>
+                                <p>Rice Farmer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-box" style="background-color: rgba(238, 192, 68,0.2);">
+                            <p class="quote">"Their AI-driven pest detection system has been a lifesaver for my farm. I
+                                can now manage infestations before they become a problem."</p>
+                            <div class="reviewer">
+                                <img src="{%static 'images/r2.jpeg' %}" alt="Reviewer 2" class="rounded-circle"
+                                    style="border: 3px solid #eec044;">
+                                <h5 style="color:#4baf47">Amit Verma</h5>
+                                <p>Organic Farmer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-box" style="background-color: rgba(75, 175, 71,0.1);">
+                            <p class="quote">"I've been able to optimize my water usage and reduce costs significantly.
+                                The platform's insights are invaluable for any farmer."</p>
+                            <div class="reviewer">
+                                <img src="{%static 'images/r3.jpeg' %}" alt="Reviewer 3" class="rounded-circle"
+                                    style="border: 3px solid #eec044;">
+                                <h5 style="color:#4baf47">Sonia Randhawa</h5>
+                                <p>Horticulturist</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="review-box" style="background-color: rgba(238, 192, 68,0.2);">
+                            <p class="quote">"Their AI-driven pest detection system has been a lifesaver for my farm. I
+                                can now manage infestations before they become a problem."</p>
+                            <div class="reviewer">
+                                <img src="{%static 'images/r2.jpeg' %}" alt="Reviewer 2" class="rounded-circle"
+                                    style="border: 3px solid #eec044;">
+                                <h5 style="color:#4baf47">Raj Sharma</h5>
+                                <p>Organic Farmer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+
+    </section>
+
+    <script>
+        const carouselElement = document.querySelector('#reviewCarousel');
+        const carousel = new bootstrap.Carousel(carouselElement, {
+            interval: 5000,
+            wrap: true
+        });
+    </script>
+
+
+    <!--index8-->
+
+    <section style="background-color: #f8f7f0;">
+
+        <div class="container pt-5 pb-5">
+            <p class="fs-3"
+                style="text-align: center;color:#4baf47;font-family:Algerian;font-weight: 500;margin-bottom:0"> From the
+                Blog</p>
+            <p style="font-size: 50px;text-align: center ;font-weight: 700;word-spacing: 1px;">Blogs<img
+                    src="{%static 'images/ampersand.png' %}" height="60px" width="50px"
+                    style="margin-top: -10px;">Articles</p>
+            <div class="row pt-4 pb-5">
+                <div class="col-md-4 ">
+                    <div class="card p-2 ">
+                        <div class="img-container">
+                            <img src="{%static 'images/garden.jpg' %}" class="card-img-top" alt="News Image 1"
+                                height="300px" width="400px">
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge badge-success">05 July 2022</span>
+                                <span
+                                    style="font-weight: 500;font-size: 20px;font-family: Georgia, 'Times New Roman', Times, serif;color: #898888;">
+                                    <img class=" pe-2" src="{%static 'images/profile.png' %}"
+                                        style="margin-top: -5px;">Person Name
+                                </span>
+                            </div>
+                            <h5 class="card-title pt-3">Bringing the Production of Food Back To Cities</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-2">
+                        <div class="img-container">
+                            <img src="{%static 'images/vegetables.jpg' %}" class="card-img-top" alt="News Image 2"
+                                height="300px" width="400px">
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge badge-success">05 July 2022</span>
+                                <span
+                                    style="font-weight: 500;font-size: 20px;font-family: Georgia, 'Times New Roman', Times, serif;color: #898888;">
+                                    <img class=" pe-2" src="{%static 'images/profile.png' %}"
+                                        style="margin-top: -5px;">Person Name
+                                </span>
+                            </div>
+                            <h5 class="card-title pt-3">The Future of Farming, Smart Irrigation Solutions</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-2">
+                        <div class="img-container">
+                            <img src="{%static 'images/service-02.webp' %}" class="card-img-top" alt="News Image 3"
+                                height="300px" width="400px">
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge badge-success">05 July 2022</span>
+                                <span
+                                    style="font-weight: 500;font-size: 20px;font-family: Georgia, 'Times New Roman', Times, serif;color: #898888;">
+                                    <img class=" pe-2" src="{%static 'images/profile.png' %}"
+                                        style="margin-top: -5px;">Person Name
+                                </span>
+                            </div>
+                            <h5 class="card-title pt-3">Agronomy and relation to Other Sciences</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!--index9-->
+
+    <section style="overflow-x: hidden;background-color: #f8f7f0;">
+        <div class="container pb-5  ">
+            <div style="display: flex;justify-content: center;">
+                <div class="p-4 partner">
+                    <img src="{%static 'images/partner-01-1.webp' %}" width="200px" height="70px">
+                </div>
+                <div class="p-4 partner">
+                    <img src="{%static 'images/partner-02-1.webp' %}" width="200px" height="70px">
+                </div>
+                <div class="p-4 partner">
+                    <img src="{%static 'images/partner-03-1.webp' %}" width="200px" height="70px">
+                </div>
+                <div class="p-4 partner">
+                    <img src="{%static 'images/partner-04-1.webp' %}" width="200px" height="70px">
+                </div>
+                <div class="p-4 partner">
+                    <img src="{%static 'images/partner-05-1.webp' %}" width="200px" height="70px">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>
+{% endblock %}

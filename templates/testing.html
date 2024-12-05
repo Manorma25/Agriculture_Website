@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'icofont/icofont.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    
+    
+    <title>Sidebar</title>
+    <style>
+        :root {
+            --cr-white: #ffffff;
+            --cr-green: #4baf47;
+            --cr-dark: #333333;
+        }
+
+        body {
+            overflow-x: hidden;
+            font-family: sans-serif;
+        }
+
+        .page {
+            display: grid;
+            grid-template-columns: 4.125rem auto;
+            grid-template-areas: "nav main";
+            min-height: 100vh;
+            color: var(--cr-dark);
+            background: var(--cr-white);
+        }
+
+        .page__nav {
+            grid-area: nav;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 4.125rem;
+            background: var(--cr-green);
+            transition: width 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0.3em 0 0.3em rgba(0, 0, 0, 0.15);
+        }
+
+        .page__nav:hover {
+            width: 13em;
+        }
+
+        .page__main {
+            grid-area: main;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* Sidebar navigation styling */
+        .nav__list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav__link {
+            color: var(--cr-white);
+            display: flex;
+            align-items: center;
+            padding: 0.8em;
+            text-decoration: none;
+            transition: background 200ms ease;
+        }
+
+        .nav__link-icon {
+            font-size: 1.6rem;
+            padding-left: 12px;
+        }
+
+        .nav__link-txt {
+            position: absolute;
+            left: 4.125rem;
+            color: var(--cr-white);
+            transition: left 0.3s ease;
+        }
+
+        .dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown.show .dropdown-menu {
+            max-height: 10em;
+        }
+
+        /* Responsive sidebar for smaller screens */
+        @media (max-width: 768px) {
+            .page__nav {
+                display: none;
+            }
+
+            .page__nav.active {
+                display: block;
+            }
+
+            .menu-btn {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                font-size: 2rem;
+                background: var(--cr-green);
+                color: var(--cr-white);
+                z-index: 1200;
+                border: none;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+
+<body class="page">
+    <button class="menu-btn"><i class="icofont-navigation-menu"></i></button>
+
+    <nav class="page__nav">
+        <h1 class="nav__logo" style="background-color: white;">
+            <a class="nav__link-logo" href="#">
+                <img src="{% static 'images/file.png' %}" height="40" width="50" alt="AgroTech Logo">
+                <span class="nav__link-txt-logo">AgroTech</span>
+            </a>
+        </h1>
+        <ul class="nav__list">
+            <li><a class="nav__link" href="{% url 'dash' %}"><i class="icofont-home nav__link-icon"></i> <span class="nav__link-txt">Dashboard</span></a></li>
+            <li class="nav__item dropdown">
+                <a class="nav__link dropdown-toggle" href="#" id="accountDropdown" role="button"><i class="icofont-user nav__link-icon"></i> <span class="nav__link-txt">My Account</span></a>
+                <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                    <li><a class="dropdown-item" href="{% url 'User Profile' %}">My Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Edit Profile' %}">Edit Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Change Password' %}">Change Password</a></li>
+                </ul>
+            </li>
+            <li class="nav__item dropdown">
+                <a class="nav__link dropdown-toggle" href="#" id="accountDropdown" role="button"><i class="icofont-user nav__link-icon"></i> <span class="nav__link-txt">My Account</span></a>
+                <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                    <li><a class="dropdown-item" href="{% url 'User Profile' %}">My Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Edit Profile' %}">Edit Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Change Password' %}">Change Password</a></li>
+                </ul>
+            </li>
+            <li><a class="nav__link" href="{% url 'dash' %}"><i class="icofont-home nav__link-icon"></i> <span class="nav__link-txt">Dashboard</span></a></li>
+            <li><a class="nav__link" href="{% url 'dash' %}"><i class="icofont-home nav__link-icon"></i> <span class="nav__link-txt">Dashboard</span></a></li>
+            <li><a class="nav__link" href="{% url 'dash' %}"><i class="icofont-home nav__link-icon"></i> <span class="nav__link-txt">Dashboard</span></a></li>
+            <!-- Additional nav items... -->
+        </ul>
+    </nav>
+
+    <div class="page__main">
+        {% block content %}{% endblock %}
+        {% include 'chatbot.html' %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('.page__nav');
+            const menuBtn = document.querySelector('.menu-btn');
+
+            document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let parent = toggle.closest('.dropdown');
+                    parent.classList.toggle('show');
+                });
+            });
+
+            menuBtn.addEventListener('click', function () {
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</body>
+</html>

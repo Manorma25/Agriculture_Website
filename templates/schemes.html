@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Agricultural Universities</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    
+    <style>
+        body {
+            background-color: rgba(238, 192, 68, 0.1) 
+        }
+
+        /* Farmer schemes section */
+        .farmer-section {
+            padding: 50px 0;
+        }
+
+        .farmer-card {
+            background-color: #fff;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+
+        .farmer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: 0.5s;
+        }
+
+        .farmer-card img {
+            height: 250px;
+            border-radius: 10px;
+        }
+
+        .farmer-card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        .btn-read-more {
+            background-color: #4baf47;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-read-more:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #2d3748;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif; 
+            text-align: center;
+           
+        }
+        @media (max-width: 768px) {
+            .farmer-card img {
+                height: 200px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div style="background-image: url({% static 'images/wheat.jpg' %});background-size:cover;height: 250px;width: 100%;">
+        <div style="background-color: rgba(0,0,0,0.4);height: 250px;display: flex;justify-content: center;align-items: center;">
+            <p class="fs-2=5" style="color:#e3dbdb;font-family: sans-serif;letter-spacing: 2px;">INSIGHTS / TECHNOLOGIES</p>
+        </div>
+    </div>
+
+    <!-- Farmer Schemes Section -->
+    <div class="container farmer-section">
+        <h1 data-aos="zoom-in"
+        data-aos-duration="1200">Farmer Schemes</h1>
+
+        <div class="row">
+            {% for i in data %}
+            <div class="col-md-4 p-4" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="farmer-card">
+                    <img src="{{ i.image.url }}" alt="{{ i.name }}" class="card-img-top">
+                    <p class="farmer-card-title">{{ i.title }}</p>
+                    <a data-aos="fade-right" data-aos-duration="1800" href="{% url 'Scheme Details' i.id %}" class="btn-read-more">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
+{% endblock %}
